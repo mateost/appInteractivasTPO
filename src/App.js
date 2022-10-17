@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+import React from "react";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import CssBaseline from "@mui/material/CssBaseline";
+
 import './App.css';
+import Barra from './components/Barra.js';
+
+// Pages
+import Home from "./pages/Home"
+
+// Images
+import bgImage from "./assets/images/books-working.jpg";
+import Login from "./pages/Login";
+import Search from "./pages/Search";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
+    <div style={{
+      backgroundImage: `url(${bgImage})`,
+      height:'100vh',
+      backgroundSize: 'cover',
+      backgroundPosition: "center",
+      }}>
+      <CssBaseline />
+      <Barra />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/search" element={<Search />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

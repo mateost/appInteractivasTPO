@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+  background-color: rgba(0, 0, 0, .5) !important;
+}

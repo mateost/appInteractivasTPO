@@ -8,7 +8,7 @@ import { Container, Content2Xl, ContentWithVerticalPadding } from "components/mi
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
-import { LogoLink } from "components/headers/light.js";
+
 import { SectionHeading as HeadingBase } from "components/misc/Headings";
 import { SectionDescription as DescriptionBase } from "components/misc/Typography";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
@@ -26,8 +26,12 @@ import { ReactComponent as HandleIcon } from "images/handle-icon.svg";
 import { ReactComponent as ArrowRightIcon } from "images/arrow-right-3-icon.svg";
 
 import heroScreenshotImageSrc from "images/tarket/college-online.jpg";
-import logo from "images/logo.svg";
+
 import useInView from "helpers/useInView";
+
+import Navbar from "components/headers/Navbar";
+import Footer from "components/footers/SimpleFiveColumn";
+
 
 
 /* Hero */
@@ -142,37 +146,25 @@ export default ({
     "Siempre disponible"
   ];
 
+  const [isLoggedIn, setisLoggedIn] = useState(null);
+  const logIn = () => {
+    setisLoggedIn(true);
+    localStorage.setItem("logged", true);
+    console.log(true);
+  };
+  const logOut = () => {
+    setisLoggedIn(false);
+    localStorage.removeItem("logged");
+    console.log(false);
+  };
+
   return (
     <AnimationRevealPage disabled>
       <Container tw="bg-gray-100 -mx-8 -mt-8 pt-8 px-8">
         <Content2Xl>
-          <NavRow>
-            <LogoLink href="/">
-              <img src={logo} alt="" />
-              Tarket
-            </LogoLink>
-            <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
-              <NavLink target="_blank" href="components/landingPages/RestaurantLandingPage">
-                Materias
-              </NavLink>
-              <NavLink target="_blank" href="components/landingPages/RestaurantLandingPage">
-                Alumnos
-              </NavLink>
-              <NavLink target="_blank" href="https://twitter.com/owaiswiz">
-                Maestros
-              </NavLink>
-              <NavLink target="_blank" href="mailto:owaiswiz@gmail.com">
-                Nosotros
-              </NavLink>
-              <div tw="md:hidden flex-100 h-0"></div>
-              <PrimaryNavLink href="components/innerPages/SignupPage">
-                Registrarse
-              </PrimaryNavLink>
-              <PrimaryNavLink href="components/innerPages/LoginPage">
-                Iniciar Sesión
-              </PrimaryNavLink>
-            </div>
-          </NavRow>
+        <Navbar>
+          
+        </Navbar>
           <HeroRow>
             <TextColumn>
               <Heading as="h1">{heading}</Heading>
@@ -241,7 +233,7 @@ export default ({
         imageContainerCss={tw`p-2!`}
         imageCss={tw`w-20! h-20!`}
       />
-            <PreviewCards>
+            {/* <PreviewCards>
               {Object.entries(landingPages).map(([pageName, page], index) => (
                 <PreviewCardContainer key={index}>
                   <PreviewCard initial="rest" animate="rest" whileHover="hover" href={page.url} target="_blank">
@@ -279,7 +271,7 @@ export default ({
                   </PreviewCard>
                 </PreviewCardContainer>
               ))}
-            </PreviewCards>
+            </PreviewCards> */}
           </SectionContainer>
 
           <SectionContainer id="componentDemos">
@@ -292,33 +284,34 @@ export default ({
                 (Preview Panel below inspired by Tailwind UI)
               </span>
             </SectionDescription>
-            <BlocksRenderer blocks={Object.values(blocks)} />
+            {/* <BlocksRenderer blocks={Object.values(blocks)} /> */}
           </SectionContainer>
         </Content2Xl>
       </Container>
+      <Footer></Footer>
     </AnimationRevealPage>
   );
 };
 
-const BlocksRenderer = ({ blocks }) => {
-  const [lastVisibleBlockIndex, setLastVisibleBlockIndex] = useState(0);
+// const BlocksRenderer = ({ blocks }) => {
+//   const [lastVisibleBlockIndex, setLastVisibleBlockIndex] = useState(0);
 
-  const updateLastVisibleBlockIndex = index => {
-    console.log("LAST WAS ", lastVisibleBlockIndex);
-    if (index > lastVisibleBlockIndex) setLastVisibleBlockIndex(index);
-  };
+//   const updateLastVisibleBlockIndex = index => {
+//     console.log("LAST WAS ", lastVisibleBlockIndex);
+//     if (index > lastVisibleBlockIndex) setLastVisibleBlockIndex(index);
+//   };
 
-  return (
-    <ComponentsContainer>
-      {blocks.map(
-        (block, index) =>
-          lastVisibleBlockIndex + 1 >= index && (
-            <Block key={index} components={block} notifyIsVisible={() => updateLastVisibleBlockIndex(index)} />
-          )
-      )}
-    </ComponentsContainer>
-  );
-};
+//   return (
+//     <ComponentsContainer>
+//       {blocks.map(
+//         (block, index) =>
+//           lastVisibleBlockIndex + 1 >= index && (
+//             <Block key={index} components={block} notifyIsVisible={() => updateLastVisibleBlockIndex(index)} />
+//           )
+//       )}
+//     </ComponentsContainer>
+//   );
+// };
 
 const Block = ({ notifyIsVisible, components }) => {
   const [ref, inView] = useInView();
@@ -340,45 +333,45 @@ const Block = ({ notifyIsVisible, components }) => {
     iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
   };
 
-  return (
-    <div ref={ref} tw="mt-32">
-      <ComponentsType>{components.type}</ComponentsType>
-      <Components>
-        {Object.values(components.elements).map((component, componentIndex) => (
-          <Component key={componentIndex}>
-            <ComponentHeading>
-              <ComponentName>{component.name}</ComponentName>
-              <ComponentPreviewLink className="group" href={component.url} target="_blank">
-                View Live Demo{" "}
-                <ArrowRightIcon tw="transition duration-300 transform group-hover:translate-x-px ml-2 w-4 h-4" />
-              </ComponentPreviewLink>
-            </ComponentHeading>
-            <ComponentContent>
-              <ResizableBox
-                minWidth={310}
-                default={{
-                  width: "100%",
-                  height: "100%"
-                }}
-                bounds="parent"
-                disableDragging={true}
-                enableResizing={{ right: true }}
-                resizeHandleComponent={{ right: ResizeHandle }}
-                resizeHandleWrapperClass={`resizeHandleWrapper`}
-                onResize={() => updateComponentBlockIframeHeight(componentBlockRefs[component.url])}
-              >
-                <iframe
-                  src={component.url}
-                  title="Hero"
-                  width="100%"
-                  ref={ref => (componentBlockRefs[component.url] = ref)}
-                  onLoad={e => updateComponentBlockIframeHeight(e.target)}
-                />
-              </ResizableBox>
-            </ComponentContent>
-          </Component>
-        ))}
-      </Components>
-    </div>
+  return (null
+    // <div ref={ref} tw="mt-32">
+    //   <ComponentsType>{components.type}</ComponentsType>
+    //   {/* <Components>
+    //     {Object.values(components.elements).map((component, componentIndex) => (
+    //       <Component key={componentIndex}>
+    //         <ComponentHeading>
+    //           <ComponentName>{component.name}</ComponentName>
+    //           <ComponentPreviewLink className="group" href={component.url} target="_blank">
+    //             View Live Demo{" "}
+    //             <ArrowRightIcon tw="transition duration-300 transform group-hover:translate-x-px ml-2 w-4 h-4" />
+    //           </ComponentPreviewLink>
+    //         </ComponentHeading>
+    //         <ComponentContent>
+    //           <ResizableBox
+    //             minWidth={310}
+    //             default={{
+    //               width: "100%",
+    //               height: "100%"
+    //             }}
+    //             bounds="parent"
+    //             disableDragging={true}
+    //             enableResizing={{ right: true }}
+    //             resizeHandleComponent={{ right: ResizeHandle }}
+    //             resizeHandleWrapperClass={`resizeHandleWrapper`}
+    //             onResize={() => updateComponentBlockIframeHeight(componentBlockRefs[component.url])}
+    //           >
+    //             <iframe
+    //               src={component.url}
+    //               title="Hero"
+    //               width="100%"
+    //               ref={ref => (componentBlockRefs[component.url] = ref)}
+    //               onLoad={e => updateComponentBlockIframeHeight(e.target)}
+    //             />
+    //           </ResizableBox>
+    //         </ComponentContent>
+    //       </Component>
+    //     ))}
+    //   </Components> */}
+    // </div>
   );
 };

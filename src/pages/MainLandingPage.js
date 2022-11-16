@@ -8,7 +8,7 @@ import { Container, Content2Xl, ContentWithVerticalPadding } from "components/mi
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
-import { LogoLink } from "components/headers/light.js";
+
 import { SectionHeading as HeadingBase } from "components/misc/Headings";
 import { SectionDescription as DescriptionBase } from "components/misc/Typography";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
@@ -26,10 +26,12 @@ import { ReactComponent as HandleIcon } from "images/handle-icon.svg";
 import { ReactComponent as ArrowRightIcon } from "images/arrow-right-3-icon.svg";
 
 import heroScreenshotImageSrc from "images/tarket/college-online.jpg";
-import logo from "images/logo.svg";
+
 import useInView from "helpers/useInView";
 
+import Navbar from "components/headers/Navbar";
 import Footer from "components/footers/SimpleFiveColumn";
+
 
 
 /* Hero */
@@ -160,33 +162,9 @@ export default ({
     <AnimationRevealPage disabled>
       <Container tw="bg-gray-100 -mx-8 -mt-8 pt-8 px-8">
         <Content2Xl>
-          <NavRow>
-            <LogoLink href="/">
-              <img src={logo} alt="" />
-              Tarket
-            </LogoLink>
-            <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
-              <NavLink target="_blank" href="components/landingPages/RestaurantLandingPage">
-                Materias
-              </NavLink>
-              <NavLink target="_blank" href="components/landingPages/RestaurantLandingPage">
-                Alumnos
-              </NavLink>
-              <NavLink target="_blank" href="https://twitter.com/owaiswiz">
-                Maestros
-              </NavLink>
-              <NavLink target="_blank" href="mailto:owaiswiz@gmail.com">
-                Nosotros
-              </NavLink>
-              <div tw="md:hidden flex-100 h-0"></div>
-              <PrimaryNavLink onClick={logOut}>
-                Registrarse
-              </PrimaryNavLink>
-              <PrimaryNavLink onClick={logIn}>
-                Iniciar Sesión
-              </PrimaryNavLink>
-            </div>
-          </NavRow>
+        <Navbar>
+          
+        </Navbar>
           <HeroRow>
             <TextColumn>
               <Heading as="h1">{heading}</Heading>

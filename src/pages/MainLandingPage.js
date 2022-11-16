@@ -142,6 +142,18 @@ export default ({
     "Siempre disponible"
   ];
 
+  const [isLoggedIn, setisLoggedIn] = useState(null);
+  const logIn = () => {
+    setisLoggedIn(true);
+    localStorage.setItem("logged", true);
+    console.log(true);
+  };
+  const logOut = () => {
+    setisLoggedIn(false);
+    localStorage.removeItem("logged");
+    console.log(false);
+  };
+
   return (
     <AnimationRevealPage disabled>
       <Container tw="bg-gray-100 -mx-8 -mt-8 pt-8 px-8">
@@ -165,10 +177,10 @@ export default ({
                 Nosotros
               </NavLink>
               <div tw="md:hidden flex-100 h-0"></div>
-              <PrimaryNavLink href="components/innerPages/SignupPage">
+              <PrimaryNavLink onClick={logOut}>
                 Registrarse
               </PrimaryNavLink>
-              <PrimaryNavLink href="components/innerPages/LoginPage">
+              <PrimaryNavLink onClick={logIn}>
                 Iniciar Sesión
               </PrimaryNavLink>
             </div>

@@ -62,7 +62,7 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 export default ({
   heading = "Checkout the Menu",
   tabs = {
-    Primario: [
+    Individual: [
       {
         imageSrc:
           imageExactas,
@@ -144,9 +144,7 @@ export default ({
         url: "#"
       }
     ],
-    Secundario: getRandomCards(),
-    Terciario: getRandomCards(),
-    Universitario: getRandomCards()
+    Grupal: getRandomCards(),
   }
 }) => {
   /*

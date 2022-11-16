@@ -1,7 +1,7 @@
 import React from "react";
 import GlobalStyles from "styles/GlobalStyles";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import RequireAuth from "services/auth.service.js";
+
 
 /*
  * This is the entry point component of this project. You can change the below exported default App component to any of
@@ -108,6 +108,7 @@ import MainLandingPage from "pages/MainLandingPage.js";
 import ThankYouPage from "ThankYouPage.js";
 
 import ComponentAlumns from "ComponentAlumns.js";
+import ComponentTeachers from "ComponentTeachers.js";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -132,6 +133,14 @@ export default function App() {
                     element={
                         <Protected isLoggedIn={localStorage.getItem('logged')}>
                             <ComponentAlumns />
+                        </Protected>
+                    }
+                />
+                <Route
+                    path="/profesor/:type/:name"
+                    element={
+                        <Protected isLoggedIn={localStorage.getItem('logged')}>
+                            <ComponentTeachers />
                         </Protected>
                     }
                 />

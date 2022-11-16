@@ -13,14 +13,22 @@ import { SectionHeading as HeadingBase } from "components/misc/Headings";
 import { SectionDescription as DescriptionBase } from "components/misc/Typography";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 
+import Features from "components/features/ThreeColSimple.js";
+import TabGrid from "components/cards/TabCardGrid.js";
+
+import chefIconImageSrc from "images/chef-icon.svg";
+import celebrationIconImageSrc from "images/celebration-icon.svg";
+import shopIconImageSrc from "images/shop-icon.svg";
+
 import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
 import { ReactComponent as RadioIcon } from "feather-icons/dist/icons/radio.svg";
 import { ReactComponent as HandleIcon } from "images/handle-icon.svg";
 import { ReactComponent as ArrowRightIcon } from "images/arrow-right-3-icon.svg";
 
-import heroScreenshotImageSrc from "images/demo/MainLandingPageHero.png";
+import heroScreenshotImageSrc from "images/tarket/college-online.jpg";
 import logo from "images/logo.svg";
 import useInView from "helpers/useInView";
+
 
 /* Hero */
 const Row = tw.div`flex`;
@@ -33,8 +41,8 @@ const HeroRow = tw(Row)`flex-col lg:flex-row justify-between items-center pt-8 l
 
 const Column = tw.div`flex-1`;
 
-const UpdateNotice = tw(Column)`w-full flex-auto mb-4 sm:mb-8 rounded px-4 py-3 sm:px-5 sm:py-4 bg-orange-100 text-orange-800 flex items-center sm:items-start md:items-center justify-center lg:justify-start border border-orange-200 text-xs sm:text-sm text-center sm:text-left md:leading-none`;
-const UpdateNoticeIcon = tw(RadioIcon)`w-0 sm:w-5 sm:mr-3`;
+// const UpdateNotice = tw(Column)`w-full flex-auto mb-4 sm:mb-8 rounded px-4 py-3 sm:px-5 sm:py-4 bg-orange-100 text-orange-800 flex items-center sm:items-start md:items-center justify-center lg:justify-start border border-orange-200 text-xs sm:text-sm text-center sm:text-left md:leading-none`;
+// const UpdateNoticeIcon = tw(RadioIcon)`w-0 sm:w-5 sm:mr-3`;
 
 const TextColumn = tw(Column)`mx-auto lg:mr-0 max-w-2xl lg:max-w-xl xl:max-w-2xl flex-shrink-0`;
 const Heading = tw(HeadingBase)`text-center lg:text-left text-primary-900 leading-snug`;
@@ -90,15 +98,15 @@ const ResizeHandleButton = tw.button`cursor-col-resize focus:outline-none w-4 bo
 export default ({
   features = null,
   primaryButtonUrl = "#landingPageDemos",
-  primaryButtonText = "Explore Demos",
+  primaryButtonText = "Explorar Materias",
   secondaryButtonUrl = "#componentDemos",
-  secondaryButtonText = "View Components",
+  secondaryButtonText = "Ver Profesores",
   buttonRoundedCss = "",
   landingPages = components.landingPages,
   innerPages = components.innerPages,
   blocks = components.blocks,
-  heading = "Free Modern React Templates for every need.",
-  description = "Easily customizable modern React UI Templates and Components built using TailwindCSS which are also lightweight and simple to setup. All components are modular and fully responsive for great mobile experience as well as big desktop screens.  Brand Colors are also fully customizable. Free for personal as well as commercial use."
+  heading = "Todo el apoyo que necesitas para aprobar.",
+  description = "Una manera sencilla y rapida de tener clases de apoyo para esas materias donde necesitas un refuerzo. Encontrá al profesor ideal para vos."
 }) => {
   /*
    * Using gtag like this because we only want to use Google Analytics when Main Landing Page is rendered
@@ -122,14 +130,16 @@ export default ({
   const noOfLandingPages = Object.keys(landingPages).length;
   const noOfInnerPages = Object.keys(innerPages).length;
   const noOfComponentBlocks = Object.values(blocks).reduce((acc, block) => acc + Object.keys(block.elements).length, 0);
+  const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
+  const Description = tw.span`inline-block mt-8`;
 
   features = features || [
-    `${noOfLandingPages} Landing Page Demos`,
-    `${noOfInnerPages} Inner Pages`,
-    `${noOfComponentBlocks} Components`,
-    "Uses TailwindCSS",
-    "Fully Responsive",
-    "Fully Customizable"
+    `${noOfLandingPages} Materias`,
+    `${noOfInnerPages} Profesores`,
+    `${noOfComponentBlocks} Bibliografia`,
+    "Todos los niveles",
+    "Completamente online",
+    "Siempre disponible"
   ];
 
   return (
@@ -142,10 +152,10 @@ export default ({
               Tarket
             </LogoLink>
             <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
-              <NavLink target="_blank" href="https://owaiskhan.me/post/free-tailwindcss-react-ui-kit">
+              <NavLink target="_blank" href="components/landingPages/RestaurantLandingPage">
                 Materias
               </NavLink>
-              <NavLink target="_blank" href="https://owaiskhan.me">
+              <NavLink target="_blank" href="components/landingPages/RestaurantLandingPage">
                 Alumnos
               </NavLink>
               <NavLink target="_blank" href="https://twitter.com/owaiswiz">
@@ -164,10 +174,6 @@ export default ({
             </div>
           </NavRow>
           <HeroRow>
-            <UpdateNotice>
-              <UpdateNoticeIcon />
-              Last updated on 10th September, 2022 - Added support for React v18 and TailwindCSS v3!
-            </UpdateNotice>
             <TextColumn>
               <Heading as="h1">{heading}</Heading>
               <Description>{description}</Description>
@@ -193,11 +199,48 @@ export default ({
             </ImageColumn>
           </HeroRow>
           <SectionContainer id="landingPageDemos">
-            <SectionHeading>Landing Pages</SectionHeading>
+            <SectionHeading>Materias</SectionHeading>
             <SectionDescription>
-              We have {noOfLandingPages} premade landing pages. Click on the "View Live Demo" button to see them in
+              Tenemos un total de {noOfLandingPages} materias disponibles. Click on the "View Live Demo" button to see them in
               action. Customizing or Creating your own custom landing page is really simple by using our UI components.
             </SectionDescription>
+            <TabGrid
+        heading={
+          <>
+            Conozca las <HighlightedText>Materias.</HighlightedText>
+          </>
+        }
+      />
+      <Features
+        heading={
+          <>
+            Amazing <HighlightedText>Services.</HighlightedText>
+          </>
+        }
+        cards={[
+          {
+            imageSrc: shopIconImageSrc,
+            title: "230+ Locations",
+            description: "Lorem ipsum donor amet siti ceali placeholder text",
+            url: "https://google.com"
+          },
+          {
+            imageSrc: chefIconImageSrc,
+            title: "Professional Chefs",
+            description: "Lorem ipsum donor amet siti ceali placeholder text",
+            url: "https://timerse.com"
+          },
+          {
+            imageSrc: celebrationIconImageSrc,
+            title: "Birthday Catering",
+            description: "Lorem ipsum donor amet siti ceali placeholder text",
+            url: "https://reddit.com"
+          }
+        ]}
+
+        imageContainerCss={tw`p-2!`}
+        imageCss={tw`w-20! h-20!`}
+      />
             <PreviewCards>
               {Object.entries(landingPages).map(([pageName, page], index) => (
                 <PreviewCardContainer key={index}>

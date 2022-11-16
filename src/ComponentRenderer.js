@@ -325,7 +325,7 @@ export const components = {
           url: "/components/blocks/Cards/Portfolio",
         },
         TabGrid: {
-          name: "Tab Card Grid With Tab Switcher",
+          name: "Materias para suscribirse",
           component: TabGridCards,
           url: "/components/blocks/Cards/TabGrid",
         },

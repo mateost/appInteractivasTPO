@@ -20,6 +20,9 @@ import HostingCloudLandingPageImageSrc from "images/demo/HostingCloudLandingPage
 
 
 import LoginPage from "pages/Login.js";
+
+import MisClases from 'pages/students/MisClases';
+
 import SignupPage from "pages/Signup.js";
 import PricingPage from "pages/Pricing.js";
 import AboutUsPage from "pages/AboutUs.js";
@@ -98,6 +101,7 @@ import FiveColumnWithInputFormFooter from "components/footers/FiveColumnWithInpu
 import FiveColumnWithBackgroundFooter from "components/footers/FiveColumnWithBackground.js";
 import FiveColumnDarkFooter from "components/footers/FiveColumnDark.js";
 import MiniCenteredFooter from "components/footers/MiniCenteredFooter.js";
+import BuscarClases from 'pages/students/BuscarClases';
 
 
 export const components = {
@@ -139,16 +143,16 @@ export const components = {
     },
   },
 
-  materias: {
-    pricing: {
-      component: PricingPage,
+  Clases: {
+    MisClases: {
+      component: MisClases,
       imageSrc: LoginPageImageSrc,
       scrollAnimationDisabled: true,
-      url: "/alumnos/materias/pricing",
+      url: "/alumnos/clases/misclases",
     },
-    SignupPage: {
-      component: SignupPage,
-      url: `/components/innerPages/SignupPage`,
+    BuscarClases: {
+      component: BuscarClases,
+      url: `/components/clases/buscarclases`,
       imageSrc: SignupPageImageSrc,
       scrollAnimationDisabled: true,
     },

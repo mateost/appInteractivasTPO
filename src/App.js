@@ -107,7 +107,7 @@ import ComponentRenderer from "ComponentRenderer.js";
 import MainLandingPage from "pages/MainLandingPage.js";
 import ThankYouPage from "ThankYouPage.js";
 
-import ComponentAlumns from "ComponentAlumns.js";
+import ComponentStudents from "ComponentStudents.js";
 import ComponentTeachers from "ComponentTeachers.js";
 
 import { Routes, Route } from "react-router-dom";
@@ -132,7 +132,7 @@ export default function App() {
                     path="/alumno/:type/:name"
                     element={
                         <Protected isLoggedIn={localStorage.getItem('logged')}>
-                            <ComponentAlumns />
+                            <ComponentStudents />
                         </Protected>
                     }
                 />

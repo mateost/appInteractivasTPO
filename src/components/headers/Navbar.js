@@ -29,14 +29,14 @@ export default () => {
             </NavLink>
             <NavLink
                 target="_blank"
-                href="components/landingPages/RestaurantLandingPage"
+                href="alumno/dashboard"
             >
                 Alumnos
             </NavLink>
-            <NavLink target="_blank" href="https://twitter.com/owaiswiz">
+            <NavLink target="_blank" href="profesor/">
                 Maestros
             </NavLink>
-            <NavLink target="_blank" href="mailto:owaiswiz@gmail.com">
+            <NavLink target="_blank" href="nosotros">
                 Nosotros
             </NavLink>
             <div tw="md:hidden flex-100 h-0"></div>

@@ -20,6 +20,9 @@ import HostingCloudLandingPageImageSrc from "images/demo/HostingCloudLandingPage
 
 
 import LoginPage from "pages/Login.js";
+
+import MisClases from 'pages/students/MisClases';
+
 import SignupPage from "pages/Signup.js";
 import PricingPage from "pages/Pricing.js";
 import AboutUsPage from "pages/AboutUs.js";
@@ -98,9 +101,17 @@ import FiveColumnWithInputFormFooter from "components/footers/FiveColumnWithInpu
 import FiveColumnWithBackgroundFooter from "components/footers/FiveColumnWithBackground.js";
 import FiveColumnDarkFooter from "components/footers/FiveColumnDark.js";
 import MiniCenteredFooter from "components/footers/MiniCenteredFooter.js";
+import BuscarClases from 'pages/students/BuscarClases';
 
 
 export const components = {
+  dashboard:{
+    dashboard:{
+      component: RestaurantLandingPage,
+      imageSrc: RestaurantLandingPageImageSrc,
+      url: "/components/landingPages/RestaurantLandingPage",
+    }
+  },
   landingPages: {
     RestaurantLandingPage: {
       component: RestaurantLandingPage,
@@ -139,16 +150,16 @@ export const components = {
     },
   },
 
-  materias: {
-    pricing: {
-      component: PricingPage,
+  Clases: {
+    MisClases: {
+      component: MisClases,
       imageSrc: LoginPageImageSrc,
       scrollAnimationDisabled: true,
-      url: "/alumnos/materias/pricing",
+      url: "/alumnos/clases/misclases",
     },
-    SignupPage: {
-      component: SignupPage,
-      url: `/components/innerPages/SignupPage`,
+    BuscarClases: {
+      component: BuscarClases,
+      url: `/components/clases/buscarclases`,
       imageSrc: SignupPageImageSrc,
       scrollAnimationDisabled: true,
     },
@@ -507,7 +518,10 @@ export const components = {
 
 export default () => {
   const { type, subtype, name } = useParams()
-
+  console.log("/------/")
+  console.log(type)
+  console.log(subtype)
+  console.log(name)
   try {
     let Component = null;
     if(type === "blocks" && subtype) {
@@ -515,14 +529,15 @@ export default () => {
       return <AnimationRevealPage disabled>
           <Component/>
         </AnimationRevealPage>
-    }
-    else
-      Component= components[type][name].component
+    } else 
+        Component= components[type][name].component
+
+    
 
     if(Component)
       return <Component/>
 
-    throw new Error("Component Not Found")
+      throw new Error("Component Not Found")
   }
   catch (e) {
     console.log(e)

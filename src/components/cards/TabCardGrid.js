@@ -212,7 +212,7 @@ export default ({
                       }}
                       transition={{ duration: 0.3 }}
                     >
-                      <CardButton>Buy Now</CardButton>
+                      <CardButton>Suscribirse</CardButton>
                     </CardHoverOverlay>
                   </CardImageContainer>
                   <CardText>

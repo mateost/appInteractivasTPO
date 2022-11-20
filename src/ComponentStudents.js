@@ -105,6 +105,13 @@ import BuscarClases from 'pages/students/BuscarClases';
 
 
 export const components = {
+  dashboard:{
+    dashboard:{
+      component: RestaurantLandingPage,
+      imageSrc: RestaurantLandingPageImageSrc,
+      url: "/components/landingPages/RestaurantLandingPage",
+    }
+  },
   landingPages: {
     RestaurantLandingPage: {
       component: RestaurantLandingPage,
@@ -511,7 +518,10 @@ export const components = {
 
 export default () => {
   const { type, subtype, name } = useParams()
-
+  console.log("/------/")
+  console.log(type)
+  console.log(subtype)
+  console.log(name)
   try {
     let Component = null;
     if(type === "blocks" && subtype) {
@@ -519,14 +529,15 @@ export default () => {
       return <AnimationRevealPage disabled>
           <Component/>
         </AnimationRevealPage>
-    }
-    else
-      Component= components[type][name].component
+    } else 
+        Component= components[type][name].component
+
+    
 
     if(Component)
       return <Component/>
 
-    throw new Error("Component Not Found")
+      throw new Error("Component Not Found")
   }
   catch (e) {
     console.log(e)

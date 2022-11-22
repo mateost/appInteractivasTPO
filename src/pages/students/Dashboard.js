@@ -10,13 +10,12 @@ import { Container, Content2Xl, ContentWithVerticalPadding } from "components/mi
 
 import { motion } from "framer-motion";
 
-import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-1.svg";
-import DesignIllustration from "../../images/design-illustration-2.svg";
-import CustomersLogoStripImage from "../../images/customers-logo-strip.png";
+import Footer from "components/footers/MiniCenteredFooter";
+import TabGrid from "pages/students/ClasesCardGrid";
 
 const Heading = tw.h1`font-bold text-3xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-900 leading-tight`;
-
-const PostsContainer = tw.div`mt-12 flex flex-col sm:flex-row sm:justify-between lg:justify-start`;
+const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
+const PostsContainer = tw.div`mt-5 flex flex-col sm:flex-row sm:justify-between lg:justify-start`;
 const Post = tw(motion.a)`block sm:max-w-sm cursor-pointer mb-16 last:mb-0 sm:mb-0 sm:odd:mr-8 lg:mr-8 xl:mr-16`;
 const Image = styled(motion.div)(props => [
   `background-image: url("${props.$imageSrc}");`,
@@ -24,6 +23,9 @@ const Image = styled(motion.div)(props => [
 ]);
 const Title = tw.h5`mt-6 text-xl font-bold transition duration-300 group-hover:text-primary-500`;
 const AuthorName = tw.h6`font-semibold text-lg`;
+
+const Row = tw.div`flex flex-col lg:flex-row -mb-10`;
+const PopularPostsContainer = tw.div`lg:w-2/3 lg:mr-10`;
 
 const RecentPostsContainer = styled.div`
   ${tw`mt-24 lg:mt-0 lg:w-1/3`}
@@ -87,12 +89,26 @@ const recentPosts = [
 export default ({ roundedHeaderButton }) => {
   return (
     <>
+     <Navbar />
+
  <AnimationRevealPage disabled>
       <Container tw="bg-gray-100 -mx-8 -mt-8 pt-8 px-8">
         <Content2Xl>
-        <Navbar />
+       
+       <Row>
+       <PopularPostsContainer>
+            <PostsContainer>
+            <TabGrid
+        heading={
+          <>
+            Mis Clases
+          </>
+        }
+      />
+            </PostsContainer>
+          </PopularPostsContainer>
         <RecentPostsContainer>
-            <Heading>Recent Posts</Heading>
+            <Heading>Ultimos Mensajes</Heading>
             <PostsContainer>
               {recentPosts.map((post, index) => (
               <Post key={index} href={post.url} className="group">
@@ -105,9 +121,11 @@ export default ({ roundedHeaderButton }) => {
               ))}
             </PostsContainer>
           </RecentPostsContainer>
-
+          
+      </Row>
       </Content2Xl>
       </Container>
+      <Footer />
     </AnimationRevealPage>
 
       

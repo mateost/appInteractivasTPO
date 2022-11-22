@@ -6,9 +6,9 @@ import { css } from "styled-components/macro";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
 /* Hero */
-const Row = tw.div`flex`;
-const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between`;
-const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-12 text-gray-700 border-gray-400 hocus:border-gray-700`;
+const Row = tw.div`flex font-display`;
+const NavRow = tw(Row)`flex flex-col p-4 lg:flex-row bg-gray-900 text-gray-100 items-center justify-between`;
+const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-12 text-gray-100 border-gray-400 hocus:border-gray-700`;
 const PrimaryNavLink = tw(
     NavLink
 )`text-gray-800 bg-gray-300 px-6 py-3 border-none rounded hocus:bg-primary-900 focus:shadow-outline mt-6 md:mt-4 lg:mt-0`;
@@ -21,7 +21,7 @@ export default () => {
                 Tarket
             </LogoLink>
             <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
-                <NavLink href="/alumno/Dashboard">Dashboard</NavLink>
+                <NavLink href="/alumno/dashboard">Dashboard</NavLink>
                 <NavLink href="/alumno/Clases/MisClases">Mis Clases</NavLink>
                 <NavLink href="/alumno/Clases/BuscarClases">Buscar Clases</NavLink>
                 <NavLink href="/alumno/Mensajes/MisMensajes">Mensajes</NavLink>

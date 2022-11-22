@@ -103,14 +103,16 @@ import FiveColumnDarkFooter from "components/footers/FiveColumnDark.js";
 import MiniCenteredFooter from "components/footers/MiniCenteredFooter.js";
 import BuscarClases from 'pages/students/BuscarClases';
 
+import Dashboard from 'pages/students/Dashboard';
+
 
 export const components = {
   dashboard:{
-    dashboard:{
-      component: RestaurantLandingPage,
+    
+      component: Dashboard,
       imageSrc: RestaurantLandingPageImageSrc,
-      url: "/components/landingPages/RestaurantLandingPage",
-    }
+      url: "/components/pages/students/Dashboard",
+   
   },
   landingPages: {
     RestaurantLandingPage: {
@@ -529,9 +531,12 @@ export default () => {
       return <AnimationRevealPage disabled>
           <Component/>
         </AnimationRevealPage>
-    } else 
+    } else {
+      if(type === "dashboard"){
+        Component= components[type].component
+      } else 
         Component= components[type][name].component
-
+}
     
 
     if(Component)

@@ -129,6 +129,14 @@ export default function App() {
                 />
                 <Route path="/:type/:name" element={<ComponentRenderer />} />
                 <Route
+                    path="/alumno/:type"
+                    element={
+                        <Protected isLoggedIn={localStorage.getItem('logged')}>
+                            <ComponentStudents />
+                        </Protected>
+                    }
+                />
+                <Route
                     path="/alumno/:type/:name"
                     element={
                         <Protected isLoggedIn={localStorage.getItem('logged')}>

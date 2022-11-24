@@ -15,7 +15,7 @@ const app = express() // crea el objeto de la aplicacion
 const server = createServer(app) // crea el servidor
 const serverSocket = new SocketIO.Server(server, {
   cors: {
-    origin: `http://localhost:3000`, // puerto de React
+    origin: `*`, // puerto de React
     methods: ['GET', 'POST'] // verbos que vamos a poder utilizar
   },
   transports: ['websocket'] // la forma en que va a transferir los paquetes es websocket
@@ -27,10 +27,6 @@ const socketClient = serverSocket.on('connection', (socket) => { //se lo manda a
  // socket.on('disconnect', () => { //algo cuando se desconecta
 
   })
-
-
-
-
 
 
 app.use(cors()) // permite que se puedan hacer peticiones desde cualquier origen

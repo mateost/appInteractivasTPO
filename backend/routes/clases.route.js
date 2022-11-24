@@ -12,6 +12,11 @@ route.all('/api/intranet/*', autentication)
 //MoviesGrid
 route.get('/api/clases', ClasesController.find)
 
+route.get('/api/clases/tipo', ClasesController.findTipo)
+
+route.get('/api/clases/materia/:materia', ClasesController.findMateria)
+route.get('/api/clases/materias', ClasesController.findMaterias)
+
 // guarda un nuevo elemento en le DB
 //url: /api/Clases que llama a la función: create()
 // debe ser un formulario para crear una nueva pelìcula

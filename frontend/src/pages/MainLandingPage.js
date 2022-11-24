@@ -9,6 +9,10 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
 
+import * as ClasesServices from "../services/clases.service";
+
+
+
 import { SectionHeading as HeadingBase } from "components/misc/Headings";
 import { SectionDescription as DescriptionBase } from "components/misc/Typography";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
@@ -116,10 +120,24 @@ export default ({
    * Using gtag like this because we only want to use Google Analytics when Main Landing Page is rendered
    * Remove this part and the the gtag script inside public/index.html if you dont need google analytics
    */
+  const [clases, setClases] = useState();
+
+  function findClases(){
+      ClasesServices.find()
+      .then(clases => {
+          setClases(clases);
+      });
+  }
+
   useEffect(() => {
     window.gtag("js", new Date());
     window.gtag("config", "UA-45799926-9");
+    findClases()
   }, [])
+
+
+
+
 
   const previewImageAnimationVariants = {
     rest: {
@@ -202,6 +220,9 @@ export default ({
             Conozca las <HighlightedText>Materias.</HighlightedText>
           </>
         }
+        tabs={
+          clases
+        }
       />
       <Features
         heading={
@@ -272,8 +293,15 @@ export default ({
                 </PreviewCardContainer>
               ))}
             </PreviewCards> */}
-          </SectionContainer>
 
+       
+     
+       
+
+          </SectionContainer>
+          <SectionContainer>
+            <SectionHeading>ACA VA LA JODA</SectionHeading>
+                    </SectionContainer>
           <SectionContainer id="componentDemos">
             <SectionHeading>Component Blocks</SectionHeading>
             <SectionDescription>

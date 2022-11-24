@@ -9,8 +9,42 @@ export function find (req, res) {
     })
 }
 
+export function findTipo (req, res) {
+  const tipo = req.params.type
+  ClaseModel.findTipo(tipo)
+    .then(function (clases) {
+      if (clases) {
+        res.status(200).json(clases)
+      } else {
+        res.status(404).json({ message: `La clase #${id} no se encuentra en el sistema.` }) // ok
+      }
+    })
+}
+
+
+export function findMateria (req, res) {
+  const materia = req.params.materia
+  ClaseModel.findMateria(materia)
+    .then(function (img) {
+      if (img) {
+        res.status(200).json(img)
+      } else {
+        res.status(404).json({ message: `La materia ${materia} no tiene una imagen cargada.` }) // ok
+      }
+    })
+}
+
+
+export function findMaterias (req, res) {
+  ClaseModel.findMaterias()
+    .then(function (materias) {
+      res.status(200).json(materias)
+    })
+}
+
 // me trae de la DB un solo elemento por su "id"
 // llama a la función findOne() de services (services:ClaseModel)
+
 export function findOne (req, res) {
   const id = req.params.idClase
   ClaseModel.findOne(id)

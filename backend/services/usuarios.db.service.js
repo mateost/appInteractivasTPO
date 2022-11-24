@@ -1,14 +1,13 @@
 import { ObjectId, MongoClient } from 'mongodb'
 
-const cliente = new MongoClient('mongodb://127.0.0.1:27017')
-
+const cliente = new MongoClient('mongodb+srv://mateyger:mateyger@cluster0.kufooss.mongodb.net/test')
 
 // me trae de la DB todo el listado completo de elementos
 export async function find () {
   return cliente.connect()
     .then(async function () {
-      const db = cliente.db('Anime')
-      const usuarios = await db.collection('Usuarios').find().toArray()
+      const db = cliente.db('trk')
+      const usuarios = await db.collection('usuarios').find().toArray()
       return usuarios
     })
 }
@@ -17,8 +16,8 @@ export async function find () {
 export async function findOne (id) {
   return cliente.connect()
     .then(async function () {
-      const db = cliente.db('Anime')
-      const usuario = await db.collection('Usuarios').findOne({ _id: ObjectId(id) })
+      const db = cliente.db('trk')
+      const usuario = await db.collection('usuarios').findOne({ _id: ObjectId(id) })
       return usuario
     })
 }
@@ -27,8 +26,8 @@ export async function findOne (id) {
 export async function create (usuario) {
   return cliente.connect()
     .then(async function () {
-      const db = cliente.db('Anime')
-      await db.collection('Usuarios').insertOne(usuario)
+      const db = cliente.db('trk')
+      await db.collection('usuarios').insertOne(usuario)
       return usuario
     })
 }
@@ -38,8 +37,8 @@ export async function updateUsuario (id, usuario) {
   console.log(id);
   return cliente.connect()
     .then(async function () {
-      const db = cliente.db('Anime')
-      await db.collection('Usuarios').updateOne({ _id: new ObjectId(id) }, { $set: usuario })
+      const db = cliente.db('trk')
+      await db.collection('usuarios').updateOne({ _id: new ObjectId(id) }, { $set: usuario })
       return usuario
     })
 
@@ -51,8 +50,8 @@ export async function changeOne (id, usuario) {
   console.log(ObjectId(id));
   return cliente.connect()
     .then(async function () {
-      const db = cliente.db('Anime')
-      await db.collection('Usuarios').updateOne({_id: new ObjectId(id)}, {$set:usuario})
+      const db = cliente.db('trk')
+      await db.collection('usuarios').updateOne({_id: new ObjectId(id)}, {$set:usuario})
       //cliente.close()
       return usuario
     })
@@ -63,8 +62,8 @@ export async function removeOne (id) {
   console.log(id);
   return cliente.connect()
     .then(async function () {
-      const db = cliente.db('Anime')
-      const usuario = await db.collection('Usuarios').deleteOne({ _id: ObjectId(id) });
+      const db = cliente.db('trk')
+      const usuario = await db.collection('usuarios').deleteOne({ _id: ObjectId(id) });
       return usuario
     })
 }

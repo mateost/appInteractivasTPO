@@ -14,6 +14,77 @@ export async function find () {
 }
 
 // me trae de la DB un solo elemento por su "id"
+export async function findTipo () {
+  return cliente.connect()
+    .then(async function () {
+      const db = cliente.db('trk')
+      //const indiv = await db.collection('clases').find({ tipo: "particular" }).toArray()
+      //const grupal = await db.collection('clases').find({ tipo: "grupal" }).toArray()
+
+      const indiv = await db.collection('clases').aggregate([
+        {
+          $lookup: {
+            from: "materias",
+            localField: "materia",
+            foreignField: "nombre",
+            as: "img"
+          }
+        },
+        {
+          $match:
+          { tipo: "particular"}
+        },
+        {
+          $set: {
+            img: { $arrayElemAt: ["$img.img", 0] }
+          }
+        }
+      ]).toArray();
+      const grupal = await db.collection('clases').aggregate([
+        {
+          $lookup: {
+            from: "materias",
+            localField: "materia",
+            foreignField: "nombre",
+            as: "img"
+          }
+        },
+        {
+          $match:
+          { tipo: "grupal"}
+        },
+        {
+          $set: {
+            img: { $arrayElemAt: ["$img.img", 0] }
+          }
+        }
+      ]).toArray();
+      return {Individual: indiv, Grupal: grupal}
+
+    })
+}
+
+export async function findMateria(materia){
+  return cliente.connect()
+  .then(async function(){
+    const db = cliente.db('trk')
+      const img = await db.collection('materias').findOne(
+        { nombre: materia } ,
+        { projection: {"img": 1, "_id":0 }}
+        )
+      return img.img
+  }).catch(() => {})
+}
+export async function findMaterias () {
+  return cliente.connect()
+    .then(async function () {
+      const db = cliente.db('trk')
+      const materias = await db.collection('materias').find({}, { projection: {"nombre":1 ,"img": 1,  "_id":0 }}).toArray()
+      return materias
+    })
+}
+
+
 export async function findOne (id) {
   return cliente.connect()
     .then(async function () {
@@ -22,6 +93,7 @@ export async function findOne (id) {
       return comida
     })
 }
+
 
 // guarda un nuevo elemento en le DB
 export async function create (comida) {

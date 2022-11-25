@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+import * as ClasesServices from "../../services/clases.service";
 //eslint-disable-next-line
 import { css } from "styled-components/macro";
 import Navbar from "components/headers/studentsNavbar";
@@ -15,7 +16,7 @@ import TabGrid from "pages/students/ClasesCardGrid";
 
 const Heading = tw.h1`font-bold text-3xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-900 leading-tight`;
 const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
-const PostsContainer = tw.div`mt-5 flex flex-col sm:flex-row sm:justify-between lg:justify-start`;
+const PostsContainer = tw.div`mt-5 flex mb-20 flex-col sm:flex-row sm:justify-between lg:justify-start`;
 const Post = tw(motion.a)`block sm:max-w-sm cursor-pointer mb-16 last:mb-0 sm:mb-0 sm:odd:mr-8 lg:mr-8 xl:mr-16`;
 const Image = styled(motion.div)(props => [
   `background-image: url("${props.$imageSrc}");`,
@@ -87,6 +88,21 @@ const recentPosts = [
   ]
 
 export default ({ roundedHeaderButton }) => {
+  const [clases, setClases] = useState();
+  
+  function findClases(){
+    ClasesServices.find()
+    .then(clases => {
+        console.log(clases)
+        setClases(clases);
+    });
+}
+
+useEffect(() => {
+  window.gtag("js", new Date());
+  window.gtag("config", "UA-45799926-9");
+  findClases()
+}, [])
   return (
     <>
      <Navbar />
@@ -103,6 +119,9 @@ export default ({ roundedHeaderButton }) => {
           <>
             Mis Clases
           </>
+        }
+        tabs={
+          clases
         }
       />
             </PostsContainer>

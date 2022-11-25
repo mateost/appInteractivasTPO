@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -9,7 +9,18 @@ import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import { ReactComponent as StarIcon } from "images/star-icon.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-5.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "images/svg-decorator-blob-7.svg";
-import imageExactas from "images/materias/gene.jpg";
+import * as ClasesServices from "../../services/clases.service";
+import gene from "images/materias/gene.png";
+
+function importAll(r) {
+	let images = {};
+  r.keys().forEach((item, index) => { images[item.replace('./', '')] = r(item); });
+	return images
+}
+
+const images = importAll(require.context('images/materias', false, /\.(png|jpe?g|svg)$/));
+
+
 
 
 const Header = tw.h1`font-bold text-3xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-900 leading-tight`;
@@ -65,7 +76,7 @@ export default ({
     Individual: [
       {
         imageSrc:
-          imageExactas,
+          gene,
         title: "Matematicas I",
         content: "Nivel inicial",
         price: "$5.99",
@@ -75,7 +86,7 @@ export default ({
       },
       {
         imageSrc:
-          imageExactas,
+          gene,
         title: "Matematicas II",
         content: "Nivel Inicial",
         price: "$2.99",
@@ -85,7 +96,7 @@ export default ({
       },
       {
         imageSrc:
-          imageExactas,
+          gene,
         title: "Analisis Matematico",
         content: "Nivel Intermedio",
         price: "$7.99",
@@ -95,7 +106,7 @@ export default ({
       },
       {
         imageSrc:
-          imageExactas,
+          gene,
         title: "Fisica I",
         content: "Crispy Soyabeans",
         price: "$8.99",
@@ -105,7 +116,7 @@ export default ({
       },
       {
         imageSrc:
-          imageExactas,
+          gene,
         title: "Analisis Matematico II",
         content: "Roasted Chicken & Egg",
         price: "$7.99",
@@ -115,7 +126,7 @@ export default ({
       },
       {
         imageSrc:
-          imageExactas,
+          gene,
         title: "Matematica Discreta",
         content: "Deepfried Chicken",
         price: "$2.99",
@@ -125,7 +136,7 @@ export default ({
       },
       {
         imageSrc:
-          imageExactas,
+          gene,
         title: "Algebra I",
         content: "Mexican Chilli",
         price: "$3.99",
@@ -135,7 +146,7 @@ export default ({
       },
       {
         imageSrc:
-          imageExactas,
+          gene,
         title: "Estadisticas",
         content: "Chilli Crispy Nachos",
         price: "$3.99",
@@ -147,6 +158,8 @@ export default ({
     Grupal: getRandomCards(),
   }
 }) => {
+
+
   /*
    * To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab
    * as the key and value of the key will be its content (as an array of objects).
@@ -179,7 +192,7 @@ export default ({
               },
               hidden: {
                 opacity: 0,
-                scale:0.8,
+                scale:1,
                 display: "none",
               }
             }}
@@ -190,13 +203,13 @@ export default ({
             {tabs[tabKey].map((card, index) => (
               <CardContainer key={index}>
                 <Card className="group" href={card.url} initial="rest" whileHover="hover" animate="rest">
-                  <CardImageContainer imageSrc={card.imageSrc}>
+                  <CardImageContainer imageSrc={images[`${card.img}`]}>
                     <CardRatingContainer>
                       <CardRating>
                         <StarIcon />
                         {card.rating}
                       </CardRating>
-                      <CardReview>({card.reviews})</CardReview>
+                      <CardReview>({card.length})</CardReview>
                     </CardRatingContainer>
                     <CardHoverOverlay
                       variants={{
@@ -215,8 +228,8 @@ export default ({
                     </CardHoverOverlay>
                   </CardImageContainer>
                   <CardText>
-                    <CardTitle>{card.title}</CardTitle>
-                    <CardContent>{card.content}</CardContent>
+                    <CardTitle>{card.nombre}</CardTitle>
+                    <CardContent>{card.materia}</CardContent>
                     <CardPrice>{card.price}</CardPrice>
                   </CardText>
                 </Card>

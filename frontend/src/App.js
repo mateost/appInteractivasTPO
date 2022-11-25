@@ -93,7 +93,7 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 
 /* Inner Pages */
 import LoginPage from "pages/Login.js";
-// import SignupPage from "pages/Signup.js";
+import SignupPage from "pages/Signup.js";
 // import PricingPage from "pages/Pricing.js";
 // import AboutUsPage from "pages/AboutUs.js";
 // import ContactUsPage from "pages/ContactUs.js";
@@ -110,12 +110,41 @@ import ThankYouPage from "ThankYouPage.js";
 import ComponentStudents from "ComponentStudents.js";
 import ComponentTeachers from "ComponentTeachers.js";
 
-import { Routes, Route } from "react-router-dom";
-
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { useEffect, useState} from 'react';
 import  Protected  from "helpers/Protected";
+import Signup from "pages/Signup";
 
 export default function App() {
-    // If you want to disable the animation just use the disabled `prop` like below on your page's component
+
+    const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+  
+    // Token, se guarda en el local storage
+    useEffect(() => {
+          const token = localStorage.getItem('token');
+  
+          if (token) {
+                          // usuario logueado
+              setUser(localStorage.getItem('user'));
+              //navigate('/');
+          }
+          // 			// si no tiene token, vuelve al login
+          else{
+                  // use navigate, redirecciona
+                  //navigate('/admin');
+           }
+  },[]);
+
+  function onLogin(user, token){
+	console.log("onlogin....")
+	//almacenamos el token
+	localStorage.setItem('token', token);
+	 //almacenamos el usuario
+	localStorage.setItem('user', JSON.stringify(user));
+	setUser(user);
+	navigate('/');
+}  // If you want to disable the animation just use the disabled `prop` like below on your page's component
     // return <AnimationRevealPage disabled>xxxxxxxxxx</AnimationRevealPage>;
     const isLoggedIn = localStorage.getItem('logged');
     console.log(isLoggedIn)
@@ -152,9 +181,10 @@ export default function App() {
                         </Protected>
                     }
                 />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/thank-you" element={<ThankYouPage />} />
+                <Route path="/login" element={<LoginPage onLogin={onLogin}/>} />
+                <Route path="/register" element={<SignupPage onLogin={onLogin}/>} />
                 <Route path="/" element={<MainLandingPage />} />
+                <Route path="/register" method="post"/>
             </Routes>
         </>
     );

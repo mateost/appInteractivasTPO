@@ -1,4 +1,4 @@
-import { ObjectId, MongoClient } from 'mongodb'
+import { ObjectId, MongoClient } from 'mongodb';
 
 const cliente = new MongoClient('mongodb+srv://mateyger:mateyger@cluster0.kufooss.mongodb.net/test')
 

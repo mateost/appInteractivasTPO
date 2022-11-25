@@ -40,7 +40,7 @@ export default () => {
                 Nosotros
             </NavLink>
             <div tw="md:hidden flex-100 h-0"></div>
-            <PrimaryNavLink onClick={null}>Registrarse</PrimaryNavLink>
+            <PrimaryNavLink href="/register">Registrarse</PrimaryNavLink>
             <PrimaryNavLink href="/login">Iniciar Sesión</PrimaryNavLink>
         </div>
     </NavRow>

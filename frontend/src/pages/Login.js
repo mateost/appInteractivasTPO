@@ -9,6 +9,10 @@ import logo from "images/logo.svg";
 import googleIconImageSrc from "images/google-icon.png";
 import twitterIconImageSrc from "images/twitter-icon.png";
 import { ReactComponent as LoginIcon } from "feather-icons/dist/icons/log-in.svg";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { useEffect, useState} from 'react';
+import * as authService from "services/auth.service";
+
 
 const Container = tw(ContainerBase)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -53,7 +57,8 @@ const IllustrationImage = styled.div`
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
 `;
 
-export default ({
+export default ({ 
+  onLogin,
   logoLinkUrl = "#",
   illustrationImageSrc = illustration,
   headingText = "Iniciar Sesion en Tarket",
@@ -74,7 +79,29 @@ export default ({
   forgotPasswordUrl = "#",
   signupUrl = "SignupPage",
 
-}) => (
+}) => {
+
+    const [userName, setuserName] = useState();
+    const [password, setPassword] = useState();
+    const [error, setError] = useState();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(userName, password);
+        authService.login(userName, password)
+            .then((auth) => {
+              console.log("Estamos en el handleSubmit")
+                console.log(auth);
+                onLogin(auth.user, auth.token);
+                
+            })
+            .catch((errorMsg) => {
+                setError('Algo anda mal  ' + errorMsg );
+                console.log(errorMsg)
+            
+            })
+    }
+return (
   <AnimationRevealPage>
     <Container>
       <Content>
@@ -98,9 +125,9 @@ export default ({
               <DividerTextContainer>
                 <DividerText>O ingrese con su e-mail</DividerText>
               </DividerTextContainer>
-              <Form>
-                <Input type="email" placeholder="Email" />
-                <Input type="password" placeholder="Password" />
+              <Form onSubmit={handleSubmit}>
+                <Input type="userName" placeholder="Email" onChange={(e) => setuserName(e.target.value)}/>
+                <Input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                 <SubmitButton type="submit">
                   <SubmitButtonIcon className="icon" />
                   <span className="text">{submitButtonText}</span>
@@ -126,4 +153,4 @@ export default ({
       </Content>
     </Container>
   </AnimationRevealPage>
-);
+)};

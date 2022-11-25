@@ -3,8 +3,8 @@ import jwt from 'jsonwebtoken'
 
 export function login (req, res) {
   const session = { //creamos la sesion para ver si existe
-    email: req.body.email,
-    pass: req.body.pass
+    email: req.body.userName,
+    pass: req.body.password
   }
   // llamamos al userService para poder comprobar si el usuario existe
   return userService.login(session)
@@ -23,11 +23,14 @@ export function login (req, res) {
 export function create (req, res) {
   const user = {
     email: req.body.email,
-    pass: req.body.pass
+    pass: req.body.password,
+    name: req.body.nombre,
+    tipo: req.body.tipo
   }
   return userService.create(user)
     .then(function (user) {
-      res.status(201).json(user)
+      const token = jwt.sign({ id: user._id, name: user.email }, 'TARKET SECRET TOKEN')
+      res.status(201).json({ user, token })
     })
 }
 export function recuperarPass(req, res) { //funcion recuperar pass

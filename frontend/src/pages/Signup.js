@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import { Container as ContainerBase } from "components/misc/Layouts";
 import tw from "twin.macro";
@@ -9,6 +10,8 @@ import logo from "images/logo.svg";
 import googleIconImageSrc from "images/google-icon.png";
 import twitterIconImageSrc from "images/twitter-icon.png";
 import { ReactComponent as SignUpIcon } from "feather-icons/dist/icons/user-plus.svg";
+import * as AuthService from "services/auth.service";
+import Select from 'react-select';
 
 const Container = tw(ContainerBase)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -53,7 +56,10 @@ const IllustrationImage = styled.div`
   ${tw`m-12 xl:m-16 w-full max-w-lg bg-contain bg-center bg-no-repeat`}
 `;
 
+
+
 export default ({
+  onLogin,
   logoLinkUrl = "#",
   illustrationImageSrc = illustration,
   headingText = "Crear Cuenta en Tarket",
@@ -73,9 +79,42 @@ export default ({
   SubmitButtonIcon = SignUpIcon,
   tosUrl = "#",
   privacyPolicyUrl = "#",
-  signInUrl = "#",
+  signInUrl = "register",
   logInUrl = "LoginPage"
-}) => (
+}) => {
+
+  
+
+  
+  const [userName, setuserName] = useState();
+  const [password, setPassword] = useState();
+  const [nombre, setNombre] = useState();
+  const [tipo, setTipo] = useState();
+  const [error, setError] = useState();
+  
+  const options = [
+    { value: 'profesor', label: 'profesor' },
+    { value: 'alumno', label: 'alumno' }
+  ]
+  
+
+
+  const handleSubmit = (e) => {
+      e.preventDefault();
+  
+      AuthService.create(userName, password, nombre, tipo)
+          .then((user) => {
+              console.log(user);
+              onLogin(user.user, user.token);
+              
+          })
+          .catch((errorMsg) => {
+              setError('Algo anda mal  ' + errorMsg );
+              console.log(errorMsg)
+          
+          })
+        }
+  return (
   <AnimationRevealPage>
     <Container>
       <Content>
@@ -99,9 +138,13 @@ export default ({
               <DividerTextContainer>
                 <DividerText>O registrarse con un e-mail</DividerText>
               </DividerTextContainer>
-              <Form>
-                <Input type="email" placeholder="Email" />
-                <Input type="password" placeholder="Password" />
+              <Form method="post" onSubmit={handleSubmit}>
+                <Select options={options} onChange={(event) => setTipo(event.value)}>
+                 </Select>
+                <br />
+                <Input type="text" placeholder="Nombre y Apellido" onChange={(e) => setNombre(e.target.value)}/>
+                <Input type="email" placeholder="Email" onChange={(e) => setuserName(e.target.value)}/>
+                <Input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                 <SubmitButton type="submit">
                   <SubmitButtonIcon className="icon" />
                   <span className="text">{submitButtonText}</span>
@@ -133,4 +176,5 @@ export default ({
       </Content>
     </Container>
   </AnimationRevealPage>
-);
+  )
+};

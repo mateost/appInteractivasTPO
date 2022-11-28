@@ -105,7 +105,7 @@ export default ({
       AuthService.create(userName, password, nombre, tipo)
           .then((user) => {
               console.log(user);
-              onLogin(user.user, user.token);
+              onLogin(user.user,  user.token);
               
           })
           .catch((errorMsg) => {

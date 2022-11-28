@@ -39,9 +39,9 @@ export async function checkExistUser(userName){
             throw new Error(response.status)
         })
 }
-export async function create(email, password){
+export async function create(email, password, nombre, tipo){
     console.log("Mostrar Mas")
-    console.log(JSON.stringify({email, password}));
+    console.log(JSON.stringify({email, password, nombre, tipo}));
     return fetch(
         'http://localhost:2032/api/register',
         {
@@ -49,7 +49,7 @@ export async function create(email, password){
             headers:{
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({email, password, nombre, tipo})
         })
         .then((response) => {
             const respuesta = response.json()

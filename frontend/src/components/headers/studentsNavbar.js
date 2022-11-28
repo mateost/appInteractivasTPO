@@ -21,7 +21,7 @@ export default () => {
                 Tarket
             </LogoLink>
             <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
-                <NavLink href="/alumno/dashboard">Dashboard</NavLink>
+                <NavLink href="/alumno">Dashboard</NavLink>
                 <NavLink href="/alumno/Clases/MisClases">Mis Clases</NavLink>
                 <NavLink href="/alumno/Clases/BuscarClases">Buscar Clases</NavLink>
                 <NavLink href="/alumno/Mensajes/MisMensajes">Mensajes</NavLink>

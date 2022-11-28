@@ -143,10 +143,12 @@ export default function App() {
 	 //almacenamos el usuario
 	localStorage.setItem('user', JSON.stringify(user));
 	setUser(user);
-	navigate('/');
+    console.log(user);
+    const tipo = user.tipo;
+	navigate('/' + tipo);
 }  // If you want to disable the animation just use the disabled `prop` like below on your page's component
     // return <AnimationRevealPage disabled>xxxxxxxxxx</AnimationRevealPage>;
-    const isLoggedIn = localStorage.getItem('logged');
+    const isLoggedIn = localStorage.getItem('token');
     console.log(isLoggedIn)
     return (
         <>
@@ -158,9 +160,17 @@ export default function App() {
                 />
                 <Route path="/:type/:name" element={<ComponentRenderer />} />
                 <Route
+                    path="/alumno"
+                    element={
+                        <Protected isLoggedIn={isLoggedIn}>
+                            <ComponentStudents />
+                        </Protected>
+                    }
+                />
+                <Route
                     path="/alumno/:type"
                     element={
-                        <Protected isLoggedIn={localStorage.getItem('logged')}>
+                        <Protected isLoggedIn={isLoggedIn}>
                             <ComponentStudents />
                         </Protected>
                     }
@@ -168,7 +178,7 @@ export default function App() {
                 <Route
                     path="/alumno/:type/:name"
                     element={
-                        <Protected isLoggedIn={localStorage.getItem('logged')}>
+                        <Protected isLoggedIn={isLoggedIn}>
                             <ComponentStudents />
                         </Protected>
                     }
@@ -176,7 +186,7 @@ export default function App() {
                 <Route
                     path="/profesor/:type/:name"
                     element={
-                        <Protected isLoggedIn={localStorage.getItem('logged')}>
+                        <Protected isLoggedIn={isLoggedIn}>
                             <ComponentTeachers />
                         </Protected>
                     }

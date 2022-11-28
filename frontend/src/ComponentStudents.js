@@ -518,10 +518,16 @@ export default () => {
     const { type, subtype, name } = useParams();
     try {
         let Component = null;
-        if (type === "blocks" && subtype) {
-            Component = components[type][subtype]["elements"][name].component;
-            return (
-                <AnimationRevealPage disabled>
+        console.log(type)
+        if (type === undefined) {
+            Component = components['dashboard'].component;
+
+        } else {
+
+            if (type === "blocks" && subtype) {
+                Component = components[type][subtype]["elements"][name].component;
+                return (
+                    <AnimationRevealPage disabled>
                     <Component />
                 </AnimationRevealPage>
             );
@@ -530,6 +536,7 @@ export default () => {
                 Component = components[type].component;
             } else Component = components[type][name].component;
         }
+    }
 
         if (Component) return <Component />;
 

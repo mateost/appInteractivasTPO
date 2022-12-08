@@ -2,7 +2,6 @@ import React from "react";
 import GlobalStyles from "styles/GlobalStyles";
 import { css } from "styled-components/macro"; //eslint-disable-line
 
-
 /*
  * This is the entry point component of this project. You can change the below exported default App component to any of
  * the prebuilt landing page components by uncommenting their import and export lines respectively.
@@ -111,93 +110,88 @@ import ComponentStudents from "ComponentStudents.js";
 import ComponentTeachers from "ComponentTeachers.js";
 
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import { useEffect, useState} from 'react';
-import  Protected  from "helpers/Protected";
-import Signup from "pages/Signup";
+import { useEffect, useState } from "react";
+import Protected from "helpers/Protected";
 
 export default function App() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-    const navigate = useNavigate();
-    const [user, setUser] = useState(null);
-  
-    // Token, se guarda en el local storage
-    useEffect(() => {
-          const token = localStorage.getItem('token');
-  
-          if (token) {
-                          // usuario logueado
-              setUser(localStorage.getItem('user'));
-              //navigate('/');
-          }
-          // 			// si no tiene token, vuelve al login
-          else{
-                  // use navigate, redirecciona
-                  //navigate('/admin');
-           }
-  },[]);
+  // Token, se guarda en el local storage
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-  function onLogin(user, token){
-	console.log("onlogin....")
-	//almacenamos el token
-	localStorage.setItem('token', token);
-	 //almacenamos el usuario
-	localStorage.setItem('user', JSON.stringify(user));
-	setUser(user);
+    if (token) {
+      // usuario logueado
+      setUser(localStorage.getItem("user"));
+      //navigate('/');
+    }
+    // 			// si no tiene token, vuelve al login
+    else {
+      // use navigate, redirecciona
+      //navigate('/admin');
+    }
+  }, []);
+
+  function onLogin(user, token) {
+    console.log("onlogin....");
+    //almacenamos el token
+    localStorage.setItem("token", token);
+    //almacenamos el usuario
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
     console.log(user);
     const tipo = user.tipo;
-	navigate('/' + tipo);
-}  // If you want to disable the animation just use the disabled `prop` like below on your page's component
-    // return <AnimationRevealPage disabled>xxxxxxxxxx</AnimationRevealPage>;
-    const isLoggedIn = localStorage.getItem('token');
-    console.log(isLoggedIn)
-    return (
-        <>
-            <GlobalStyles />
-            <Routes>
-                <Route
-                    path="/:type/:subtype/:name"
-                    element={<ComponentRenderer />}
-                />
-                <Route path="/:type/:name" element={<ComponentRenderer />} />
-                <Route
-                    path="/alumno"
-                    element={
-                        <Protected isLoggedIn={isLoggedIn}>
-                            <ComponentStudents />
-                        </Protected>
-                    }
-                />
-                <Route
-                    path="/alumno/:type"
-                    element={
-                        <Protected isLoggedIn={isLoggedIn}>
-                            <ComponentStudents />
-                        </Protected>
-                    }
-                />
-                <Route
-                    path="/alumno/:type/:name"
-                    element={
-                        <Protected isLoggedIn={isLoggedIn}>
-                            <ComponentStudents />
-                        </Protected>
-                    }
-                />
-                <Route
-                    path="/profesor/:type/:name"
-                    element={
-                        <Protected isLoggedIn={isLoggedIn}>
-                            <ComponentTeachers />
-                        </Protected>
-                    }
-                />
-                <Route path="/login" element={<LoginPage onLogin={onLogin}/>} />
-                <Route path="/register" element={<SignupPage onLogin={onLogin}/>} />
-                <Route path="/" element={<MainLandingPage />} />
-                <Route path="/register" method="post"/>
-            </Routes>
-        </>
-    );
+    navigate("/" + tipo);
+  } // If you want to disable the animation just use the disabled `prop` like below on your page's component
+  // return <AnimationRevealPage disabled>xxxxxxxxxx</AnimationRevealPage>;
+  const isLoggedIn = localStorage.getItem("token");
+  console.log(isLoggedIn);
+  return (
+    <>
+      <GlobalStyles />
+      <Routes>
+        <Route path="/:type/:subtype/:name" element={<ComponentRenderer />} />
+        <Route path="/:type/:name" element={<ComponentRenderer />} />
+        <Route
+          path="/alumno"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <ComponentStudents />
+            </Protected>
+          }
+        />
+        <Route
+          path="/alumno/:type"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <ComponentStudents />
+            </Protected>
+          }
+        />
+        <Route
+          path="/alumno/:type/:name"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <ComponentStudents />
+            </Protected>
+          }
+        />
+        <Route
+          path="/profesor/:type/:name"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <ComponentTeachers />
+            </Protected>
+          }
+        />
+        <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
+        <Route path="/register" element={<SignupPage onLogin={onLogin} />} />
+        <Route path="/" element={<MainLandingPage />} />
+        <Route path="/register" method="post" />
+      </Routes>
+    </>
+  );
 }
 
 // export default EventLandingPage;

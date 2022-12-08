@@ -8,7 +8,7 @@
     "server": "nodemon --ignore data/ --ignore public/ app.js"
   },
   "keywords": [],
-  "author": "José Carballo y Andrea Polizzi",
+  "author": "Mateo Stornelli y German Baez",
   "license": "ISC",
   "devDependencies": {
     "eslint": "7.32.0",

@@ -94,7 +94,7 @@ export default ({
   const [experiencia, setExperiencia] = useState();
   const [fechaNacimiento, setFechaNacimiento] = useState();
   const [estudios, setEstudios] = useState();
-  const [completado, setCompletado] = useState();
+  const [completado, setCompletado] = useState(true);
 
   const [error, setError] = useState();
 
@@ -113,7 +113,18 @@ export default ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    AuthService.create(userName, password, nombre, tipo)
+    AuthService.create(
+      userName,
+      password,
+      nombre,
+      tipo,
+      telefono,
+      titulo,
+      experiencia,
+      fechaNacimiento,
+      estudios,
+      completado
+    )
       .then((user) => {
         console.log(user);
         onLogin(user.user, user.token);

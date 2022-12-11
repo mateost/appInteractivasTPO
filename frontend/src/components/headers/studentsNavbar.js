@@ -27,7 +27,7 @@ export default () => {
                 <NavLink href="/alumno/Mensajes/MisMensajes">Mensajes</NavLink>
                 <NavLink href="/alumno/MiCuenta">Mi Cuenta</NavLink>
                 <div tw="md:hidden flex-100 h-0"></div>
-                <PrimaryNavLink href="/login">Cerrar Sesión</PrimaryNavLink>
+                <PrimaryNavLink href="/logout">Cerrar Sesión</PrimaryNavLink>
             </div>
         </NavRow>
     );

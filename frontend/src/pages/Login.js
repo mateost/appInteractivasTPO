@@ -62,22 +62,10 @@ export default ({
   logoLinkUrl = "#",
   illustrationImageSrc = illustration,
   headingText = "Iniciar Sesion en Tarket",
-  socialButtons = [
-    {
-      iconImageSrc: googleIconImageSrc,
-      text: "Sign In With Google",
-      url: "https://google.com"
-    },
-    {
-      iconImageSrc: twitterIconImageSrc,
-      text: "Sign In With Twitter",
-      url: "https://twitter.com"
-    }
-  ],
   submitButtonText = "Iniciar Sesión",
   SubmitButtonIcon = LoginIcon,
   forgotPasswordUrl = "#",
-  signupUrl = "SignupPage",
+  signupUrl = "register",
 
 }) => {
 
@@ -112,19 +100,6 @@ return (
           <MainContent>
             <Heading>{headingText}</Heading>
             <FormContainer>
-              <SocialButtonsContainer>
-                {socialButtons.map((socialButton, index) => (
-                  <SocialButton key={index} href={socialButton.url}>
-                    <span className="iconContainer">
-                      <img src={socialButton.iconImageSrc} className="icon" alt=""/>
-                    </span>
-                    <span className="text">{socialButton.text}</span>
-                  </SocialButton>
-                ))}
-              </SocialButtonsContainer>
-              <DividerTextContainer>
-                <DividerText>O ingrese con su e-mail</DividerText>
-              </DividerTextContainer>
               <Form onSubmit={handleSubmit}>
                 <Input type="userName" placeholder="Email" onChange={(e) => setuserName(e.target.value)}/>
                 <Input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>

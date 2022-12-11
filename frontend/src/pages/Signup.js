@@ -87,6 +87,8 @@ export default ({
 }) => {
   const [userName, setuserName] = useState();
   const [password, setPassword] = useState();
+  const [preguntaSecreta, setPreguntaSecreta] = useState();
+  const [respuestaSecreta, setRespuestaSecreta] = useState();
   const [nombre, setNombre] = useState();
   const [tipo, setTipoUsuario] = useState();
   const [telefono, setTelefono] = useState();
@@ -116,6 +118,8 @@ export default ({
     AuthService.create(
       userName,
       password,
+      preguntaSecreta,
+      respuestaSecreta,
       nombre,
       tipo,
       telefono,
@@ -168,10 +172,18 @@ export default ({
                     onChange={(event) => setTipoUsuario(event.value)}
                   />
                   <Input
+                    style={{ "margin-bottom": "20px" }}
                     type="text"
                     placeholder="Nombre y Apellido"
                     onChange={(e) => setNombre(e.target.value)}
                   />
+                  <div>
+                    <label>Fecha de Nacimiento:</label>
+                    <Input
+                      type="date"
+                      onChange={(e) => setFechaNacimiento(e.target.value)}
+                    />
+                  </div>
                   <Input
                     type="email"
                     placeholder="Email"
@@ -179,8 +191,18 @@ export default ({
                   />
                   <Input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Contraseña"
                     onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    placeholder="Pregunta Secreta"
+                    onChange={(e) => setPreguntaSecreta(e.target.value)}
+                  />
+                  <Input
+                    type="password"
+                    placeholder="Respuesta Secreta"
+                    onChange={(e) => setRespuestaSecreta(e.target.value)}
                   />
                   <Input
                     style={{ "margin-bottom": "20px" }}
@@ -203,13 +225,6 @@ export default ({
                     </div>
                   ) : tipo === "alumno" ? (
                     <div>
-                      <div>
-                        <label>Fecha de Nacimiento:</label>
-                        <Input
-                          type="date"
-                          onChange={(e) => setFechaNacimiento(e.target.value)}
-                        />
-                      </div>
                       <div>
                         <label>Estudios:</label>
                         <Select

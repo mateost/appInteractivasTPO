@@ -777,5 +777,5 @@ module.exports = {
     transitionDuration: ["responsive"],
   },
   corePlugins: {},
-  plugins: [require("flowbite/plugin")],
+  plugins: [],
 };

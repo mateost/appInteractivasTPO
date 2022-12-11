@@ -35,6 +35,8 @@ export async function checkExistUser(userName) {
 export async function create(
   userName,
   password,
+  preguntaSecreta,
+  respuestaSecreta,
   nombre,
   tipo,
   telefono,
@@ -44,11 +46,13 @@ export async function create(
   estudios,
   completado
 ) {
-  console.log("Mostrar Mas");
+  console.log("Mostrar Mas!!!");
   console.log(
     JSON.stringify({
       userName,
       password,
+      preguntaSecreta,
+      respuestaSecreta,
       nombre,
       tipo,
       telefono,
@@ -67,6 +71,8 @@ export async function create(
     body: JSON.stringify({
       userName,
       password,
+      preguntaSecreta,
+      respuestaSecreta,
       nombre,
       tipo,
       telefono,

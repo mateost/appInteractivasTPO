@@ -8,8 +8,9 @@ const cliente = new MongoClient(
 export async function login({ email, pass }) {
   await cliente.connect();
   const db = cliente.db("trk");
-  const user = await db.collection("usustarios").findOne({ email });
+  const user = await db.collection("usuarios").findOne({ email });
   // verificacmos si el usuario exie
+
   if (user) {
     const validate = await bcrypt.compare(pass, user.pass); //omo ahora la pass està encriptada, cuando se hace el login se utiliza bcrypt.compare() para comparar ambas contraseñas, el 1 parámetro es la contraseña sin hashear y el 2 paràmetro es la contraseña encriptada
     console.log(pass);
@@ -44,6 +45,7 @@ export async function create(user) {
     .findOne({ email: user.userName }); // traigo el usuario
   //en el if verifico si existe el usuario antes de crearlo
   console.log("imprimo userOld:::", userOld);
+  console.log(user);
   if (!userOld) {
     const salt = await bcrypt.genSalt(10); // en genSalt() le decimos cuantas veces queremos que salte para hashear el pass
     const newUser = {
@@ -64,7 +66,7 @@ export async function create(user) {
 
     delete newUser["pass"];
     delete newUser["respuestaSecreta"];
-
+ 
     console.log(newUser);
 
     if (user.tipo === "alumno") {

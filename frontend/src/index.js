@@ -5,6 +5,8 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
 
+import ClaseDetalle from "views/ClaseDetalle.js";
+
 // layouts
 
 import Admin from "layouts/Admin.js";
@@ -26,6 +28,7 @@ ReactDOM.render(
       <Route path="/auth/*" element={<Auth />} />
       <Route path="/alumno/*" element={<Alumno />} />
       <Route path="/profesor/*" element={<Profesor />} />
+      <Route path="/clase/:id" element={<ClaseDetalle  />} />
       {/* add routes without layouts */}
       <Route path="/landing" exact element={<Landing/>} />
       <Route path="/profile" exact element={<Profile/>} />

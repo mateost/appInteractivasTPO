@@ -220,8 +220,8 @@ export default function CardClase({
                         <small className="p-8">{clases["Individual"][claseKey].descripcion}</small>
                     </div>
                     <div className="mt-4 py-6 bg-transparent bg-transparent rounded-b px-4 py-3 border-t border-blueGray-200">
-                        <a href="#pablo" className="text-lightBlue-500">
-                            Suscribirse
+                        <a href={"clase/" + clases["Individual"][claseKey]._id} className="text-lightBlue-500">
+                            Ver más
                         </a>
                     </div>
                 </div>

@@ -27,7 +27,7 @@ const PagesDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        Demo Pages
+        Accesos
       </a>
       <div
         ref={popoverDropdownRef}
@@ -41,7 +41,7 @@ const PagesDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Admin Layout
+          Usuarios
         </span>
         <Link
           to="/admin/dashboard"
@@ -57,7 +57,7 @@ const PagesDropdown = () => {
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
         >
-          Settings
+          Perfil
         </Link>
         <Link
           to="/admin/tables"
@@ -65,47 +65,17 @@ const PagesDropdown = () => {
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
         >
-          Tables
+          Clases
         </Link>
-        <Link
-          to="/admin/maps"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-        >
-          Maps
-        </Link>
+       
+       
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span
           className={
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Auth Layout
-        </span>
-        <Link
-          to="/auth/login"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-        >
-          Login
-        </Link>
-        <Link
-          to="/auth/register"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-        >
-          Register
-        </Link>
-        <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
-        <span
-          className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-          }
-        >
-          No Layout
+          Accesos
         </span>
         <Link
           to="/landing"
@@ -113,7 +83,7 @@ const PagesDropdown = () => {
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
         >
-          Landing
+          Principal
         </Link>
         <Link
           to="/profile"
@@ -121,7 +91,7 @@ const PagesDropdown = () => {
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
         >
-          Profile
+          Acerca de...
         </Link>
       </div>
     </>

@@ -4,7 +4,7 @@ import * as controller from "../controllers/auth.controller.js";
 const route = express.Router();
 route.post("/api/register", controller.create);
 route.post("/api/login", controller.login);
-route.post("/api/recuperarpass", controller.resetearPass);
+route.post("/api/resetearPass", controller.resetearPass);
 route.get("/api/preguntaSecreta", controller.preguntaSecreta);
 export default route;
 

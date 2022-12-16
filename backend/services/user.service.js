@@ -5,6 +5,8 @@ const cliente = new MongoClient(
   "mongodb+srv://mateyger:mateyger@cluster0.kufooss.mongodb.net/test"
 );
 
+const salt = await bcrypt.genSalt(10); // en genSalt() le decimos cuantas veces queremos que salte para hashear el pass
+
 export async function login({ email, pass }) {
   console.log(email, pass);
   await cliente.connect();
@@ -49,12 +51,18 @@ export async function resetearPass(email, newPassword, respuestaSecreta) {
   const db = cliente.db("trk");
   const user = await db.collection("usuarios").findOne({ email: email });
   if (user) {
-    const validate = await bcrypt.compare(
+    const respuestaCorrecta = await bcrypt.compare(
       respuestaSecreta,
       user.respuestaSecreta
     );
 
-    if (validate) {
+    if (respuestaCorrecta) {
+      await db
+        .collection("usuarios")
+        .updateOne(
+          { email: email },
+          { $set: { pass: await bcrypt.hash(newPassword, salt) } }
+        );
       delete user["pass"];
       delete user["respuestaSecreta"]; // le coloco '' para oculatr el pass y que no se visualice le pass encriptado. EL pass se debe ocultar porque solamente se utiliza para verificar autenticación, por lo cual solamente autenticaciòn deberìa conocer porque sino hasta pueden saber el sistema de encriptado que estamos utilizando
       return user;
@@ -73,7 +81,6 @@ export async function create(user) {
   //en el if verifico si existe el usuario antes de crearlo
   console.log("imprimo userOld:::", userOld);
   if (!userOld) {
-    const salt = await bcrypt.genSalt(10); // en genSalt() le decimos cuantas veces queremos que salte para hashear el pass
     const newUser = {
       name: user.nombre,
       email: user.userName,

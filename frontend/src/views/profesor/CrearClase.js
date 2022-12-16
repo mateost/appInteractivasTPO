@@ -72,8 +72,8 @@ export default function Register2() {
             comentarios
         }
         ));
-        ClaseService.create([
-            JSON.stringify({
+        ClaseService.create(
+            {
                 nombre,
                 materia,
                 profesorId,
@@ -84,7 +84,7 @@ export default function Register2() {
                 duracionHoras,
                 calificaciones,
                 comentarios
-            })]
+            }
         )
           .then((clase) => {
             console.log(clase);

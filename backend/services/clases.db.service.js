@@ -127,6 +127,7 @@ export async function create (clase) {
     .then(async function () {
       const db = cliente.db('trk')
       await db.collection('clases').insertOne(clase)
+      await db.collection('clases').updateOne({ _id: new ObjectId(clase._id) }, { $set: { profesorId: ObjectId(clase.profesorId)} })
       return clase
     })
 }

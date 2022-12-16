@@ -41,6 +41,6 @@ route.put('/api/intranet/clases/:idClase', ClasesController.changeOne)
 // elimina el elemento del cual le paso el "id"
 //url: /api/Clases/:idClase que llama a la función: removeOne()
 //botòn para eliminar la pelìcula
-route.delete('/api/intranet/clases/:idClase', ClasesController.removeOne)
+route.delete('/api/clases/:idClase', ClasesController.removeOne)
 
 export default route

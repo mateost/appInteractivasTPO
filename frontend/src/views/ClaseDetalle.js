@@ -163,6 +163,20 @@ export default function Profile({
                                                 >
                                                     Inscribirse
                                                 </button>
+                                        
+                                                <button
+                                                    className="bg-amber-500 active:bg-amber-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                                                    type="button"
+                                                >
+                                                    Baja
+                                                </button>
+                                           
+                                                <button
+                                                    className="bg-lime-500 active:bg-lime-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                                                    type="button"
+                                                >
+                                                    Completado
+                                                </button>
                                             </div>
                                         </div>
                                         <div className="w-full lg:w-4/12 px-4 lg:order-1">

@@ -89,44 +89,70 @@ export async function findOne (id) {
   return cliente.connect()
     .then(async function () {
       const db = cliente.db('trk')
-      const comida = await db.collection('clases').findOne({ _id: ObjectId(id) })
-      return comida
+      const clase = await db.collection('clases').findOne({ _id: ObjectId(id) }) 
+      return clase
     })
 }
 
-
-// guarda un nuevo elemento en le DB
-export async function create (comida) {
+export async function findProfesor (id) {
   return cliente.connect()
     .then(async function () {
       const db = cliente.db('trk')
-      await db.collection('clases').insertOne(comida)
-      return comida
+      const clase = await db.collection('clases').aggregate([
+        {
+          $lookup: {
+            from: "materias",
+            localField: "materia",
+            foreignField: "nombre",
+            as: "img"
+          }
+        },
+        {
+          $match:
+          { profesorId: ObjectId(id) }
+        },
+        {
+          $set: {
+            img: { $arrayElemAt: ["$img.img", 0] }
+          }
+        }
+      ]).toArray()
+      return clase
+    })
+}
+
+// guarda un nuevo elemento en le DB
+export async function create (clase) {
+  return cliente.connect()
+    .then(async function () {
+      const db = cliente.db('trk')
+      await db.collection('clases').insertOne(clase)
+      return clase
     })
 }
 
 // edita los datos del elemento del cual le paso el "id" (edita los campos que le mando en el body, si el campo ya existe: reemplaza la info por a nueva; si el campo no existe: lo crea con la nueva info que le mando EL resto de los datos quedan tal cual stan originalmente)
-export async function updateComida (id, comida) {
+export async function updateClase (id, clase) {
   console.log(id);
   return cliente.connect()
     .then(async function () {
       const db = cliente.db('trk')
-      await db.collection('clases').updateOne({ _id: new ObjectId(id) }, { $set: comida })
-      return comida
+      await db.collection('clases').updateOne({ _id: new ObjectId(id) }, { $set: clase })
+      return clase
     })
 
 }
 
 // reemplaza los datos del elemento del cual le paso el "id" (reeplaza todos los atos existentes por los nuevos (borra loq ue están y soo deja los nuevos que le mando por body, ya sea que existan los campos o que sean nuevos)
-export async function changeOne (id, comida) {
-  console.log(comida);
+export async function changeOne (id, clase) {
+  console.log(clase);
   console.log(ObjectId(id));
   return cliente.connect()
     .then(async function () {
       const db = cliente.db('trk')
-      await db.collection('clases').updateOne({_id: new ObjectId(id)}, {$set:comida})
+      await db.collection('clases').updateOne({_id: new ObjectId(id)}, {$set:clase})
       //cliente.close()
-      return comida
+      return clase
     })
 }
 
@@ -136,7 +162,7 @@ export async function removeOne (id) {
   return cliente.connect()
     .then(async function () {
       const db = cliente.db('trk')
-      const comida = await db.collection('clases').deleteOne({ _id: ObjectId(id) });
-      return comida
+      const clase = await db.collection('clases').deleteOne({ _id: ObjectId(id) });
+      return clase
     })
 }

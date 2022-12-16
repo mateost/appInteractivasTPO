@@ -10,9 +10,8 @@ import FooterAdmin from "components/Footers/FooterAdmin.js";
 
 // views
 
-import Dashboard from "views/profesor/Dashboard.js";
 import Maps from "views/profesor/Maps.js";
-import Settings from "views/profesor/Settings.js";
+import MisClases from "views/profesor/MisClases.js";
 import Tables from "views/profesor/Tables.js";
 
 export default function Profesor() {
@@ -25,11 +24,10 @@ export default function Profesor() {
         <HeaderProfesor />
         <div className="px-4 md:px-10 mx-auto w-full -m-24">
           <Routes>
-            <Route path="dashboard" exact element={<Dashboard/>} />
             <Route path="maps" exact element={<Maps/>} />
-            <Route path="settings" exact element={<Settings/>} />
+            <Route path="misclases" exact element={<MisClases/>} />
             <Route path="tables" exact element={<Tables/>} />
-            <Route path="*" element={<Navigate to="dashboard" />} />
+            <Route path="*" element={<Navigate to="misclases" />} />
           </Routes>
           <FooterAdmin />
         </div>

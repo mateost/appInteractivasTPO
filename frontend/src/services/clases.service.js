@@ -21,3 +21,17 @@ export async function findOne(id){
             return list
     })
 }
+
+
+export async function FindOneProfesor(idProfesor){
+    return fetch('http://localhost:2032/api/clases/profesor/' + idProfesor ,{
+        headers:{
+            'auth-token': localStorage.getItem('token')
+        }
+    })
+    .then(response => response.json())
+    .then(list => {
+        console.log(list)
+            return list
+    })
+}

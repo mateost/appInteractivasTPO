@@ -114,3 +114,15 @@ export function removeOne (req, res) {
   })
 }
 
+
+export function findProfesor (req, res) {
+  const id = req.params.idProfesor
+  ClaseModel.findProfesor(id)
+    .then(function (clase) {
+      if (clase) {
+        res.status(200).json(clase)
+      } else {
+        res.status(404).json({ message: `La clase #${id} no se encuentra en el sistema.` }) // ok
+      }
+    })
+}

@@ -35,3 +35,7 @@ export async function FindOneProfesor(idProfesor){
             return list
     })
 }
+
+export async function create(clase){
+    console.log(clase)
+}

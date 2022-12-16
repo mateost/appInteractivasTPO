@@ -12,6 +12,7 @@ import FooterAdmin from "components/Footers/FooterAdmin.js";
 
 import Maps from "views/profesor/Maps.js";
 import MisClases from "views/profesor/MisClases.js";
+import CrearClase from "views/profesor/CrearClase.js";
 import Tables from "views/profesor/Tables.js";
 
 export default function Profesor() {
@@ -26,6 +27,7 @@ export default function Profesor() {
           <Routes>
             <Route path="maps" exact element={<Maps/>} />
             <Route path="misclases" exact element={<MisClases/>} />
+            <Route path="crearclase" exact element={<CrearClase/>} />
             <Route path="tables" exact element={<Tables/>} />
             <Route path="*" element={<Navigate to="misclases" />} />
           </Routes>

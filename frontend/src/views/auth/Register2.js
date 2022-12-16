@@ -131,7 +131,7 @@ export default function Register2() {
                                                 <input
                                                     type="text"
                                                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                    defaultValue="Juan Gomez"
+                                                    placeholder="Juan Gomez"
                                                     {...register("nombreyapellido", { required: true })}
                                                     onChange={(e) =>
                                                         setNombre(
@@ -153,7 +153,7 @@ export default function Register2() {
                                                 <input
                                                     type="text"
                                                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                    defaultValue="+54 11 2222 3333"
+                                                    placeholder="+54 11 2222 3333"
                                                     onChange={(e) =>
                                                         setTelefono(
                                                             e.target.value
@@ -173,7 +173,7 @@ export default function Register2() {
                                                 <input
                                                     type="date"
                                                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                    defaultValue="lucky.jesse"
+                                                    placeholder="lucky.jesse"
                                                     onChange={(e) =>
                                                         setFechaNacimiento(
                                                             e.target.value
@@ -221,7 +221,7 @@ export default function Register2() {
                                                         <input
                                                             type="text"
                                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                            defaultValue="lucky.jesse"
+                                                            placeholder="lucky.jesse"
                                                             onChange={(e) =>
                                                                 setTitulo(
                                                                     e.target
@@ -242,7 +242,7 @@ export default function Register2() {
                                                         <input
                                                             type="text"
                                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                            defaultValue="lucky.jesse"
+                                                            placeholder="lucky.jesse"
                                                             onChange={(e) =>
                                                                 setExperiencia(
                                                                     e.target
@@ -317,7 +317,7 @@ export default function Register2() {
                                                 <input
                                                     type="email"
                                                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                    defaultValue="jesse@example.com"
+                                                    placeholder="jesse@example.com"
                                                     onChange={(e) =>
                                                         setuserName(
                                                             e.target.value
@@ -390,7 +390,7 @@ export default function Register2() {
                                                 <input
                                                     type="text"
                                                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                    defaultValue="Cual es el nombre de tu primera mascota?"
+                                                    placeholder="Cual es el nombre de tu primera mascota?"
                                                     onChange={(e) =>
                                                         setPreguntaSecreta(
                                                             e.target.value
@@ -467,7 +467,7 @@ export default function Register2() {
                                                 <textarea
                                                     type="text"
                                                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                    defaultValue="Soy un tipo muy copado que no puede aprender las materias porque me la paso tirando borradores al techo"
+                                                    placeholder="Soy un tipo muy copado que no puede aprender las materias porque me la paso tirando borradores al techo"
                                                     rows="4"
                                                 ></textarea>
                                             </div>

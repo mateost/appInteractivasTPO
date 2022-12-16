@@ -55,7 +55,8 @@ ReactDOM.render(
             {/* add routes without layouts */}
             <Route path="/landing" exact element={<Landing />} />
             <Route path="/profile" exact element={<Profile />} />
-            <Route path="/" exact element={<Index />} />
+            <Route path="/" exact element={<Landing />} />
+            <Route path="*" element={<Navigate to="/" />} />
             {/* add Navigate for first page */}
             {/* <Navigate from="*" to="/" /> */}
         </Routes>

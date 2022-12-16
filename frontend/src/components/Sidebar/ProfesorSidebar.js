@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 import UserDropdown from "components/Dropdowns/UserDropdown.js";
+import { CerrarSesion } from "services/auth.service";
 
 export default function AlumnoSidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -200,6 +201,25 @@ export default function AlumnoSidebar() {
                   Profile Page
                 </Link>
               </li>
+              <li className="items-center">
+                                <a
+                                    href=""
+                                    className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                                    onClick={(e) => CerrarSesion()}
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-map-marked mr-2 text-sm " +
+                                            (window.location.href.indexOf(
+                                                "/alumno/maps"
+                                            ) !== -1
+                                                ? "opacity-75"
+                                                : "text-blueGray-300")
+                                        }
+                                    ></i>{" "}
+                                    Cerrar Sesión
+                                </a>
+                            </li>
             </ul>
           </div>
         </div>

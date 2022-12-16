@@ -1,3 +1,5 @@
+import { Navigate } from "react-router-dom";
+
 export async function login(userName, password) {
     console.log("Mostrar Mas");
     console.log(JSON.stringify({ userName, password }));
@@ -17,6 +19,12 @@ export async function login(userName, password) {
         throw new Error(response.status);
     });
 }
+
+export async function CerrarSesion(){
+    localStorage.clear()
+    return <Navigate to="/auth/login" replace/>
+}
+
 
 export async function checkExistUser(userName) {
     return fetch("http://localhost:2032/api/existUser", {

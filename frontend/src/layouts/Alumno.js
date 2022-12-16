@@ -11,7 +11,6 @@ import FooterAdmin from "components/Footers/FooterAdmin.js";
 // views
 
 import Dashboard from "views/alumno/Dashboard.js";
-import Maps from "views/alumno/Maps.js";
 import MisClases from "views/alumno/MisClases.js";
 import Tables from "views/alumno/Tables.js";
 
@@ -26,7 +25,6 @@ export default function Alumno() {
         <div className="px-4 md:px-10 mx-auto w-full -m-24">
           <Routes>
             <Route path="dashboard" exact element={<Dashboard/>} />
-            <Route path="maps" exact element={<Maps/>} />
             <Route path="misclases" exact element={<MisClases />} />
             <Route path="tables" exact element={<Tables/>} />
             <Route path="*" element={<Navigate to="dashboard" />} />

@@ -19,23 +19,46 @@ import Profesor from "layouts/Profesor.js";
 import Landing from "views/Landing.js";
 import Profile from "views/Profile.js";
 import Index from "views/Index.js";
-
+import Protected from "services/Protected";
+const isLoggedIn = localStorage.getItem("token");
+console.log(isLoggedIn)
 ReactDOM.render(
-  <BrowserRouter>
-    <Routes>
-      {/* add routes with layouts */}
-      <Route path="/admin/*" element={<Admin />} />
-      <Route path="/auth/*" element={<Auth />} />
-      <Route path="/alumno/*" element={<Alumno />} />
-      <Route path="/profesor/*" element={<Profesor />} />
-      <Route path="/clase/:id" element={<ClaseDetalle  />} />
-      {/* add routes without layouts */}
-      <Route path="/landing" exact element={<Landing/>} />
-      <Route path="/profile" exact element={<Profile/>} />
-      <Route path="/" exact element={<Index/>} />
-      {/* add Navigate for first page */}
-      {/* <Navigate from="*" to="/" /> */}
-    </Routes>
-  </BrowserRouter>,
-  document.getElementById("root")
+    <BrowserRouter>
+        <Routes>
+            {/* add routes with layouts */}
+            <Route
+                path="/admin/*"
+                element={
+                    <Protected tipo={"admin"}>
+                        <Admin />
+                    </Protected>
+                }
+            />
+            <Route path="/auth/*" element={<Auth />} />
+            <Route
+                path="/alumno/*"
+                element={
+                    <Protected tipo={"alumno"}>
+                        <Alumno />
+                    </Protected>
+                }
+            />
+            <Route
+                path="/profesor/*"
+                element={
+                    <Protected tipo={"profesor"}>
+                        <Profesor />
+                    </Protected>
+                }
+            />
+            <Route path="/clase/:id" element={<ClaseDetalle />} />
+            {/* add routes without layouts */}
+            <Route path="/landing" exact element={<Landing />} />
+            <Route path="/profile" exact element={<Profile />} />
+            <Route path="/" exact element={<Index />} />
+            {/* add Navigate for first page */}
+            {/* <Navigate from="*" to="/" /> */}
+        </Routes>
+    </BrowserRouter>,
+    document.getElementById("root")
 );

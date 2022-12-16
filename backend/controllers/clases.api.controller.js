@@ -27,11 +27,9 @@ export function findMateria(req, res) {
     if (img) {
       res.status(200).json(img);
     } else {
-      res
-        .status(404)
-        .json({
-          message: `La materia ${materia} no tiene una imagen cargada.`,
-        }); // ok
+      res.status(404).json({
+        message: `La materia ${materia} no tiene una imagen cargada.`,
+      }); // ok
     }
   });
 }
@@ -128,5 +126,11 @@ export function findProfesor(req, res) {
 }
 
 export function search(req, res) {
-  res.status(200).json(service);
+  const filtros = {};
+  console.log((req.body.nombre = undefined));
+  if ((req.body.nombre = undefined)) {
+    filtros["nombre"] = req.body.nombre;
+  }
+  console.log(filtros);
+  res.status(200).json(service.search(filtros));
 }

@@ -7,6 +7,7 @@ export function login(req, res) {
     email: req.body.userName,
     pass: req.body.password,
   };
+  console.log(session);
   // llamamos al userService para poder comprobar si el usuario existe
   return userService.login(session).then(function (user) {
     if (user) {
@@ -37,13 +38,31 @@ export function create(req, res) {
     res.status(201).json({ user, token });
   });
 }
-export function recuperarPass(req, res) {
-  //funcion recuperar pass
-  const user = {
-    email: req.body.email,
-  };
+export async function preguntaSecreta(req, res) {
+  const email = req.headers.email;
+  console.log(email);
   // llamamos al userService para poder comprobar si el usuario existe
-  return userService.verificarExistencia(req.body.email).then(function (user) {
-    res.status(201).json(user);
-  });
+  const existe = await userService.verificarExistencia(email);
+  if (!existe) {
+    console.log("no existe");
+    return res.status(404).json({ msg: "No encontre el email." });
+  }
+  const preguntaSecreta = await userService.preguntaSecreta(email);
+  res.status(201).json({ preguntaSecreta: preguntaSecreta });
+}
+
+export async function resetearPass(req, res) {
+  //funcion resetear pass
+  const email = req.body.email;
+  const newPassword = req.body.newPassword;
+  const respuestaSecreta = req.body.respuestaSecreta;
+  // llamamos al userService para poder comprobar si el usuario existe
+  const existe = await userService.verificarExistencia(email);
+  if (!existe) {
+    console.log("no existe");
+    return res.status(404).json({ msg: "No encontre el email." });
+  }
+  await userService.resetearPass(email, newPassword, respuestaSecreta);
+
+  res.status(200).json({ preguntaSecreta: preguntaSecreta });
 }

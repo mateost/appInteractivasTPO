@@ -6,33 +6,61 @@ const cliente = new MongoClient(
 );
 
 export async function login({ email, pass }) {
+  console.log(email, pass);
   await cliente.connect();
   const db = cliente.db("trk");
-  const user = await db.collection("usustarios").findOne({ email });
+  const user = await db.collection("usuarios").findOne({ email: email });
   // verificacmos si el usuario exie
   if (user) {
     const validate = await bcrypt.compare(pass, user.pass); //omo ahora la pass està encriptada, cuando se hace el login se utiliza bcrypt.compare() para comparar ambas contraseñas, el 1 parámetro es la contraseña sin hashear y el 2 paràmetro es la contraseña encriptada
-    console.log(pass);
+
     if (validate) {
-      user.pass = ""; // le coloco '' para oculatr el pass y que no se visualice le pass encriptado. EL pass se debe ocultar porque solamente se utiliza para verificar autenticación, por lo cual solamente autenticaciòn deberìa conocer porque sino hasta pueden saber el sistema de encriptado que estamos utilizando
+      delete user["pass"];
+      delete user["respuestaSecreta"]; // le coloco '' para oculatr el pass y que no se visualice le pass encriptado. EL pass se debe ocultar porque solamente se utiliza para verificar autenticación, por lo cual solamente autenticaciòn deberìa conocer porque sino hasta pueden saber el sistema de encriptado que estamos utilizando
       return user;
     }
   }
 
   return null;
 }
-export async function verificarExistencia(nombre) {
+export async function verificarExistencia(email) {
   //funcion recuperar usuario, paramatro que pide es nombre
   await cliente.connect();
   const db = cliente.db("trk");
-  const resultadodeconsulta = await db
-    .collection("usuarios")
-    .findOne({ email: nombre });
-  if (resultadodeconsulta) {
-    return resultadodeconsulta.email;
+  const user = await db.collection("usuarios").findOne({ email: email });
+  if (user) {
+    return true;
   } else {
-    return "Disculpa, este usuario no existe";
+    return false;
   }
+}
+
+export async function preguntaSecreta(email) {
+  //funcion recuperar pregunt secreta
+  await cliente.connect();
+  const db = cliente.db("trk");
+  const user = await db.collection("usuarios").findOne({ email: email });
+  return user.preguntaSecreta;
+}
+
+export async function resetearPass(email, newPassword, respuestaSecreta) {
+  //funcion recuperar pregunt secreta
+  await cliente.connect();
+  const db = cliente.db("trk");
+  const user = await db.collection("usuarios").findOne({ email: email });
+  if (user) {
+    const validate = await bcrypt.compare(
+      respuestaSecreta,
+      user.respuestaSecreta
+    );
+
+    if (validate) {
+      delete user["pass"];
+      delete user["respuestaSecreta"]; // le coloco '' para oculatr el pass y que no se visualice le pass encriptado. EL pass se debe ocultar porque solamente se utiliza para verificar autenticación, por lo cual solamente autenticaciòn deberìa conocer porque sino hasta pueden saber el sistema de encriptado que estamos utilizando
+      return user;
+    }
+  }
+  return null;
 }
 
 export async function create(user) {
@@ -71,7 +99,25 @@ export async function create(user) {
       const newAlumno = {
         email: user.userName,
         name: user.nombre,
+        telefono: user.telefono,
+        fechaNacimiento: user.fechaNacimiento,
+        estudios: { nombre: user.estudios, terminado: user.completado },
+        notificaciones: [],
       };
+      console.log(newAlumno);
+      await db.collection("alumnos").insertOne(newAlumno);
+    } else if (user.tipo === "profesor") {
+      const newProfesor = {
+        name: user.nombre,
+        email: user.userName,
+        telefono: user.telefono,
+        fechaNacimiento: user.fechaNacimiento,
+        titulo: user.titulo,
+        experiencia: user.experiencia,
+        notificaciones: [],
+      };
+      console.log(newProfesor);
+      await db.collection("profesores").insertOne(newProfesor);
     }
     return newUser;
   } else {

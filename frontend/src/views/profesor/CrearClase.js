@@ -72,17 +72,19 @@ export default function Register2() {
             comentarios
         }
         ));
-        ClaseService.create(
-            nombre,
-            materia,
-            profesorId,
-            descripcion,
-            tipo,
-            frecuencia,
-            costo,
-            duracionHoras,
-            calificaciones,
-            comentarios
+        ClaseService.create([
+            JSON.stringify({
+                nombre,
+                materia,
+                profesorId,
+                descripcion,
+                tipo,
+                frecuencia,
+                costo,
+                duracionHoras,
+                calificaciones,
+                comentarios
+            })]
         )
           .then((clase) => {
             console.log(clase);

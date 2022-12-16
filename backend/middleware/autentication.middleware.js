@@ -4,7 +4,7 @@ export function autentication (req, res, next) {
   try {
     const token = req.headers['auth-token']
     if (token) {
-      const tokenValidate = jwt.verify(token, 'ANIME SECRET')
+      const tokenValidate = jwt.verify(token, "TARKET SECRET TOKEN")
       if (tokenValidate) {
         next()
       } else {

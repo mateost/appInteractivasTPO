@@ -37,5 +37,21 @@ export async function FindOneProfesor(idProfesor){
 }
 
 export async function create(clase){
-    console.log(clase)
-}
+    return fetch(   
+        //  Fetch - Le ponemos un 2 parametro donde le enviamos dentro del header el token al backend
+          'http://localhost:2032/api/clases',
+          {
+              method: 'POST',
+              headers:{
+                  'Content-Type': 'application/json',
+                  'auth-token': localStorage.getItem('token')
+              },
+              body: JSON.stringify(clase)
+          })
+      .then(response => response.json())
+      .then(clase => {
+          return clase
+      })
+    }
+
+

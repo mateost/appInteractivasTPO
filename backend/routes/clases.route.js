@@ -21,7 +21,7 @@ route.get('/api/clases/profesor/:idProfesor', ClasesController.findProfesor)
 //url: /api/Clases que llama a la función: create()
 // debe ser un formulario para crear una nueva pelìcula
 // debe ser un formulario para crear una nueva pelìcula
-route.post('/api/intranet/clases', ClasesController.create)
+route.post('/api/clases', ClasesController.create)
 
 // me trae de la DB un solo elemento por su "id"
 //url: /api/Clases/:idClase que llama a la función: find()

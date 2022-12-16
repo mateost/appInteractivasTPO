@@ -7,6 +7,10 @@ import UserDropdown from "components/Dropdowns/UserDropdown.js";
 
 export default function AlumnoSidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
+  console.log("mis clases")
+  console.log(window.location.href.indexOf("/alumno/misclases"))
+  console.log("dashboard")
+  console.log(window.location.href.indexOf("/alumno/dashboard"))
   return (
     <>
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
@@ -92,7 +96,7 @@ export default function AlumnoSidebar() {
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
-                  to="/alumno/dashboard"
+                  to="dashboard"
                 >
                   <i
                     className={
@@ -110,16 +114,16 @@ export default function AlumnoSidebar() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/alumno/settings") !== -1
+                    (window.location.href.indexOf("/alumno/misclases") !== -1
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
-                  to="/alumno/settings"
+                  to="misclases"
                 >
                   <i
                     className={
                       "fas fa-tools mr-2 text-sm " +
-                      (window.location.href.indexOf("/alumno/settings") !== -1
+                      (window.location.href.indexOf("/alumno/misclases") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }

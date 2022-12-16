@@ -12,7 +12,7 @@ import FooterAdmin from "components/Footers/FooterAdmin.js";
 
 import Dashboard from "views/alumno/Dashboard.js";
 import Maps from "views/alumno/Maps.js";
-import Settings from "views/alumno/Settings.js";
+import MisClases from "views/alumno/MisClases.js";
 import Tables from "views/alumno/Tables.js";
 
 export default function Alumno() {
@@ -27,7 +27,7 @@ export default function Alumno() {
           <Routes>
             <Route path="dashboard" exact element={<Dashboard/>} />
             <Route path="maps" exact element={<Maps/>} />
-            <Route path="settings" exact element={<Settings/>} />
+            <Route path="misclases" exact element={<MisClases />} />
             <Route path="tables" exact element={<Tables/>} />
             <Route path="*" element={<Navigate to="dashboard" />} />
           </Routes>

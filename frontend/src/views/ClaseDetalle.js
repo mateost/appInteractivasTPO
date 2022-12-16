@@ -301,6 +301,8 @@ export default function Profile({
                                                     : " "}
                                             </div>
                                         </div>
+                                        {localStorage.getItem("tipo")==="alumno" ? 
+                                        <>
                                         <a
                                             href="#pablo"
                                             className="font-normal text-lightBlue-500"
@@ -365,6 +367,9 @@ export default function Profile({
                                         ) : (
                                             " "
                                         )}
+                                        </>
+                                    : (" ")
+                                    }
                                     </div>
                                 </div>
                             </div>

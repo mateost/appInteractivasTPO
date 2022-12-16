@@ -18,6 +18,7 @@ import Profesor from "layouts/Profesor.js";
 
 import Landing from "views/Landing.js";
 import Profile from "views/Profile.js";
+import BuscarClases from "views/BuscarClases.js";
 import Index from "views/Index.js";
 import Protected from "services/Protected";
 const isLoggedIn = localStorage.getItem("token");
@@ -55,6 +56,7 @@ ReactDOM.render(
             {/* add routes without layouts */}
             <Route path="/landing" exact element={<Landing />} />
             <Route path="/profile" exact element={<Profile />} />
+            <Route path="/buscarclases" exact element={<BuscarClases />} />
             <Route path="/" exact element={<Landing />} />
             <Route path="*" element={<Navigate to="/" />} />
             {/* add Navigate for first page */}

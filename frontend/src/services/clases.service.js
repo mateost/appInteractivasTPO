@@ -23,6 +23,23 @@ export async function findOne(id){
 }
 
 
+export async function CommentOne(id, alumnoId, comentario){
+    return fetch(`http://localhost:2032/api/clases/comentar/${id}` ,{
+        headers:{
+            // method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('token')
+            },
+            body: JSON.stringify({ "alumno": alumnoId, "comentario": comentario })
+        }
+    })
+    .then(response => response.json())
+    .then(list => {
+            return list
+    })
+}
+
 export async function FindOneProfesor(idProfesor){
     return fetch('http://localhost:2032/api/clases/profesor/' + idProfesor ,{
         headers:{
